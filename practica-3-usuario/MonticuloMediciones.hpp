@@ -159,14 +159,6 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 			#endif
 		}
 
-		/*inline ed::Medicion getElement(int i) const
-		{
-			#ifndef NDEBUG
-				assert((i>=0) && (i<366));
-			#endif
-			return _mediciones[i];
-		}*/
-
 		//! \name Observadores
 
 	/*! 
@@ -204,14 +196,9 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 	*/
 		inline ed::Medicion top() const
 		{
-			/*#ifndef NDEBUG
+			#ifndef NDEBUG
 				assert(isEmpty() == false);
 			#endif
-			ed::Medicion *top = new ed::Medicion();
-			*top = getElement(0);
-			#ifndef DEBUG
-				assert(getElement(0) == *top);
-			#endif*/
 			return getElement(0);
 		}
 

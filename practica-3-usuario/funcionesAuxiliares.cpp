@@ -28,9 +28,10 @@ void ed::cargarMonticuloDeFichero(std::string const & nombreFichero, ed::Monticu
  	{
  		monticulo.removeAll();
 
- 		while(!fich.eof())
+ 		// while(!fich.eof())
+ 		while(fich >> aux)
  		{
- 			fich >> aux;
+ 			// fich >> aux;
  			monticulo.insert(aux);
  		}
  	}

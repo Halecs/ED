@@ -110,12 +110,6 @@
 		#endif
 			if(isEmpty())
 				return;
-		//Ponemos el ultimo el primero y hacemos un shiftdown
-		/*ed::Medicion aux = getElement(size() - 1);
-		//swap v[0] v[size-1]
-		setElement(0, aux);
-		shiftDown(0);
-		_size--;*/
 
 		if(size() == 1)
 		{
@@ -135,17 +129,6 @@
 
 	void ed::MonticuloMediciones::removeAll()
 	{
-		/*int xsize = size();
-		if (isEmpty())
-			return;
-		if(size() == 1)
-			remove();
-		else
-		{
-			for (int i = 0; i < xsize; ++i)
-				remove();
-		}*/
-
 		int xsize = size();
 		int i;
 		for (i = 0; i < xsize; ++i)
