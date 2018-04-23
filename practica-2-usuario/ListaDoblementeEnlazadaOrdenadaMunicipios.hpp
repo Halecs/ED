@@ -134,20 +134,6 @@ namespace ed {
 
 	inline int nItems() const
 	{
-		//ed::NodoDoblementeEnlazadoMunicipio * aux = getHead();
-		/*this->gotoHead();
-		int contador = 0;
-		while(aux != NULL)
-		{
-			aux = aux->getNext();
-			contador++;
-		}*/
-		/*while(getCurrent() != NULL)
-		{
-			contador++;
-			this->gotoNext();
-		}
-		contador++;*/
 		return _nItems;
 	}
 
@@ -187,8 +173,6 @@ namespace ed {
 			assert(isFirstItem() == false);
 		#endif
 
-		// ed::NodoDoblementeEnlazadoMunicipio *aux = new ed::NodoDoblementeEnlazadoMunicipio();
-		// setCurrent(getCurrent()->getPrevious());
 		 ed::NodoDoblementeEnlazadoMunicipio *aux = getCurrent()->getPrevious();
 		return aux->getItem();
 	}
@@ -213,7 +197,6 @@ namespace ed {
 	bool find(ed::Municipio const & item);
 	void insert(ed::Municipio const & item);
 	void remove();	
-	//void removeAll();
 	inline void removeAll()
 	{
 		if(isEmpty())
@@ -221,13 +204,6 @@ namespace ed {
 		setCurrent(_head);
 		while(!isEmpty()) 
 			remove();
-    /*this->setCurrent(getHead());
-    while(!isEmpty()) remove();
-
-    //Post-Condicion
-    #ifndef NDEBUG
-     assert( isEmpty()==true );
-    #endif*/
 	}
 
 

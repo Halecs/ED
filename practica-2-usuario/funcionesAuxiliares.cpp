@@ -150,9 +150,6 @@ void ed::consultarDatosDeProvincia(ed::Provincia &provincia)
 		std::cout<<"No hay municipios"<<std::endl;
 		return;
 	}
-	//std::cout << "SE DEBE COMPLETAR EL CÓDIGO DE ESTA FUNCIÓN " << std::endl;
-	/*std::cout<<BICYAN<<"NOMBRE | CODIGO | HOMBRES | MUJERES | PERSONAS | MUNICIPIOS"<<RESET<<std::endl;
-	std::cout<<provincia.getNombre()<<" "<<provincia.getCodigo()<<" "<<provincia.getTotalHombres()<<" "<<provincia.getTotalMujeres()<<" "<<provincia.getTotalHabitantes()<<" "<<provincia.getNumeroMunicipios()<<std::endl;*/
 	std::cout<<BIYELLOW<<"Datos de Provincia\t: Codigo: "<<provincia.getCodigo()<<",Nombre: "<<provincia.getNombre()<<std::endl;
 	std::cout<<BIYELLOW<<"Numero de Municipios: "<<provincia.getNumeroMunicipios() <<" Numero de Habitantes de la provincia: "<<provincia.getTotalHabitantes()<<std::endl;
 	return;
@@ -162,7 +159,6 @@ void ed::consultarDatosDeProvincia(ed::Provincia &provincia)
 //
 void ed::mostrarMunicipiosDeProvincia(ed::Provincia & provincia)
 {
-	// std::cout << "SE DEBE COMPLETAR EL CÓDIGO DE ESTA FUNCIÓN " << std::endl;
 	if(!provincia.hayMunicipios())
 	{
 		std::cout<<"No hay municipios"<<std::endl;
@@ -178,10 +174,6 @@ void ed::mostrarMunicipiosDeProvincia(ed::Provincia & provincia)
 ////////////////////////////////////////////////////////////////////////
 void ed::modificarDatosDeProvincia(ed::Provincia &provincia)
 {
-
-// std::cout << "SE DEBE COMPLETAR EL CÓDIGO DE ESTA FUNCIÓN " << std::endl;
-
-// QUITAR LOS COMENTARIOS CUANDO SE HAYA CODIFICADO LA CLASE Provincia
 
 
 	int opcion, codigo;
@@ -250,7 +242,6 @@ void ed::borrarTodosLosMunicipiosDeProvincia(ed::Provincia &provincia)
 
 void ed::consultarMunicipioDeProvincia(ed::Provincia &provincia)
 {
-	// std::cout << "SE DEBE COMPLETAR EL CÓDIGO DE ESTA FUNCIÓN " << std::endl;
 	char aux2[200];
 	std::cout<<BIYELLOW<<"Introduzca nombre del municipio a consultar"<<std::endl;
 	std::cin.getline(aux2,200);
@@ -264,7 +255,6 @@ void ed::consultarMunicipioDeProvincia(ed::Provincia &provincia)
 
 void ed::insertarMunicipioEnProvincia(ed::Provincia &provincia)
 {
-	//std::cout << "SE DEBE COMPLETAR EL CÓDIGO DE ESTA FUNCIÓN " << std::endl;
 	ed::Municipio mun;
 	std::cout<<BIYELLOW<<"Codigo postal del municipio"<<RESET<<std::endl;
 	int i;
