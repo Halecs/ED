@@ -125,12 +125,12 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 				assert(i >= 1);
 			#endif
 
-			int parent =  (i-1)/2;
+			int  parent = (i-1)/2;
 
-			/*#ifndef NDEBUG
+			#ifndef NDEBUG
 				 assert(parent == i-1);
-			#endif*/
-			return parent;						
+			#endif
+			return (int)parent;						
 		}
 		void shiftUp(int i);
 		void shiftDown(int i);
@@ -277,7 +277,7 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 	*/
    		inline void print()
    		{
-   			// int contador = 0;
+   			 int contador = 0;
    			if(isEmpty())
    			{
    				std::cout<<BIRED<<"No hay elementos introducidos en el monticulo"<<RESET<<std::endl;
@@ -288,12 +288,12 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
    			for (int i = 0; i < size(); ++i)
    			{
    				getElement(i).escribirMedicion();
-   				/*contador++;
-  				if(contador == 70)
+   				contador++;
+  				if(contador == 10)
   				{
   					std::cin.ignore();
   					contador = 0;
-  				}*/
+  				}
   			}
    		}
 	}; // Clase MonticuloMediciones

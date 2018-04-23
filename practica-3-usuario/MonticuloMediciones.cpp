@@ -27,7 +27,7 @@
 			shiftUp(getParent(i));
 		}
 		/*#ifndef NDEBUG
-			assert(getElement(i) > getElement(getRightChild(i)));
+			assert(getElement(i).getPrecipitacion() > getElement(getRightChild(i)).getPrecipitacion());
 			assert(getElement(i) < getElement(getLeftChild(i)));
 			assert(getElement(i) <= getElement(getParent(i)));
 		#endif*/
@@ -47,12 +47,9 @@
 			n = rc;
 		if(i != n)
 		{
-			//std::swap(getElement(i),getElement(n));
 			aux = getElement(i);
 			aux2 = getElement(n);
-			//getElement(i) = getElement(n);
 			setElement(i,aux2);
-			//getElement(n) = aux;
 			setElement(n,aux);
 			shiftDown(n);
 		}
@@ -76,6 +73,12 @@
 
 	void ed::MonticuloMediciones::insert(ed::Medicion &medicion)
 	{
+		if(has(medicion))
+		{
+			std::cout<<BIRED<<"Esa medicion ya existe en el monticulo"<<RESET<<std::endl;
+			return;
+		}
+
 		if(size() == 0)
 		{
 			setElement(0, medicion);
