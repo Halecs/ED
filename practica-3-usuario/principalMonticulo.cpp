@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 
 	// Se graba el montículo en el fichero: las mediciones son grabadas en orden descendente
 	std::cout << "Se graba el montículo en el fichero " << nombreFicheroSalida << std::endl;
-	std::cout << "Las mediciones son grabadas en orden descendente " << std::endl;
+	std::cout << "Las mediciones son grabadas en orden descendente " <<RESET<< std::endl;
 
 	ed::grabarMonticuloEnFichero(nombreFicheroSalida,monticulo);
 

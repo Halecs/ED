@@ -33,7 +33,7 @@ void ed::cargarMonticuloDeFichero(std::string const & nombreFichero, ed::Monticu
  			if(aux.getFecha().esCorrecta())
  				monticulo.insert(aux);
  		}
-		std::cout<<BIGREEN<<"Fichero cargado con exito"<<std::endl;
+		std::cout<<BIGREEN<<"Fichero cargado con exito"<<RESET<<std::endl;
  	}
 
  	else
@@ -49,11 +49,17 @@ void ed::cargarMonticuloDeFichero(std::string const & nombreFichero, ed::Monticu
 void ed::grabarMonticuloEnFichero(std::string const & nombreFichero, 
 							      ed::MonticuloMediciones const & monticulo)
 {
+	ed::MonticuloMediciones aux = monticulo;
  	std::ofstream fich(nombreFichero.c_str());
  	if(fich.is_open())
  	{
- 		for (int i = 0; i < monticulo.size(); ++i)
- 			fich << monticulo.getMedicion(i);
+ 		// for (int i = 0; i < monticulo.size(); ++i)
+ 			// fich << monticulo.getMedicion(i);
+ 		while(!aux.isEmpty())
+ 		{
+ 			fich<<aux.top();
+ 			aux.remove();
+ 		}
  	}
  	fich.close();
 	return;

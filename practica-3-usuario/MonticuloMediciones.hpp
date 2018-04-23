@@ -128,7 +128,7 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 			int  parent = (i-1)/2;
 
 			#ifndef NDEBUG
-				 assert(parent == i-1);
+				 assert(parent == (i-1)/2);
 			#endif
 			return (int)parent;						
 		}
