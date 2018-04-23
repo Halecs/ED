@@ -203,15 +203,21 @@ class Medicion
 	*/
 	inline void leerMedicion()
 	{
-		int dia, mes, agno;
 		double prep;
+		/*int dia, mes, agno;
 		std::cout<<BIYELLOW<<"Introduzca dia"<<std::endl;
 		std::cin>>dia;
 		std::cout<<BIYELLOW<<"Introduzca mes"<<std::endl;
 		std::cin>>mes;
 		std::cout<<BIYELLOW<<"Introduzca agno"<<std::endl;
-		std::cin>>agno;
-		ed::Fecha *aux = new ed::Fecha(dia, mes, agno);
+		std::cin>>agno;*/
+		ed::Fecha *aux = new ed::Fecha();
+		aux->leerFecha();
+		while(!aux->esCorrecta())
+		{
+			std::cout<<BIRED<<"Fecha incorrecta, introduzca una fecha valida"<<RESET<<std::endl;
+			aux->leerFecha();
+		}
 		std::cout<<BIYELLOW<<"Introduzca precipitacion de lluvia"<<std::endl;
 		std::cin>>prep;
 		setFecha(*aux);
