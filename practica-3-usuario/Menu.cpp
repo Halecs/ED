@@ -101,6 +101,7 @@ int main(){
 				  	std::cin>>nombreFicheroSalida;
 				  	ed::grabarMonticuloEnFichero(nombreFicheroSalida, monticulo);
 				  	std::cout<<BIGREEN<<"Fichero grabado con exito"<<RESET<<std::endl;
+				  	std::cin.ignore();
 					break;
 
 
