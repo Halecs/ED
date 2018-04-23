@@ -28,12 +28,18 @@ void ed::cargarMonticuloDeFichero(std::string const & nombreFichero, ed::Monticu
  	{
  		monticulo.removeAll();
 
- 		// while(!fich.eof())
  		while(fich >> aux)
  		{
- 			// fich >> aux;
- 			monticulo.insert(aux);
+ 			if(aux.getFecha().esCorrecta())
+ 				monticulo.insert(aux);
  		}
+		std::cout<<BIGREEN<<"Fichero cargado con exito"<<std::endl;
+ 	}
+
+ 	else
+ 	{
+ 		std::cout<<BIRED<<"No existe el fichero"<<RESET<<std::endl;
+ 		std::cin.ignore();
  	}
  	fich.close();
 	return;
@@ -103,11 +109,15 @@ int ed::menu()
 	PLACE(posicion++,10);
 	std::cout << "[8] Mostrar cabeza del monticulo";
 
+	PLACE(posicion++,10);
+	std::cout<<"[9] Mostrar numero de elementos en el monticulo";
+
 	//////////////////////////////////////////////////////////////////////////////
 	posicion++;
 
 	PLACE(posicion++,10);
 	std::cout << BIRED << "[0] Salir";
+
 
 	//////////////////////////////////////////////////////////////////////////////
 	posicion++;

@@ -86,10 +86,9 @@ int main(){
 
 			case 5: 
 				  	std::cout << "[5] Cargar desde fichero" << std::endl;
-					std::cout<<BIYELLOW<<"Introduzca nombre del fichero de donde quiere cargar el monticulo"<<std::endl;
+					std::cout<<BIYELLOW<<"Introduzca nombre del fichero de donde quiere cargar el monticulo"<<RESET<<std::endl;
 				  	std::cin>>nombreFicheroEntrada;
 					ed::cargarMonticuloDeFichero(nombreFicheroEntrada,monticulo);
-					std::cout<<BIGREEN<<"Fichero cargado con exito"<<std::endl;
 					break;
 
 
@@ -98,9 +97,10 @@ int main(){
 					std::cout << "[6] Grabar fichero" 
 							  << std::endl;
 
-					std::cout<<BIYELLOW<<"Introduzca nombre del fichero donde quiere guardar el monticulo"<<std::endl;
+					std::cout<<BIYELLOW<<"Introduzca nombre del fichero donde quiere guardar el monticulo"<<RESET<<std::endl;
 				  	std::cin>>nombreFicheroSalida;
 				  	ed::grabarMonticuloEnFichero(nombreFicheroSalida, monticulo);
+				  	std::cout<<BIGREEN<<"Fichero grabado con exito"<<RESET<<std::endl;
 					break;
 
 
@@ -123,6 +123,16 @@ int main(){
 						break;
 					}
 					std::cout<<BIGREEN<<monticulo.top()<<std::endl;
+					break;
+			case 9:
+					std::cout<<"[9] Mostrar numero de elementos en el monticulo" << std::endl;
+					if(monticulo.isEmpty())
+					{
+						std::cout<<BIRED<<"El monticulo esta vacio"<<std::endl;
+						break;
+					}
+					else
+						std::cout<<BIGREEN<<"El tamaño del monticulo es "<<monticulo.size()<<RESET<<std::endl;
 					break;
 			//////////////////////////////////////////////////////////////////////////////
 			default:

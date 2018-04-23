@@ -125,10 +125,10 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 				assert(i >= 1);
 			#endif
 
-			int parent = i - 0.5;
+			int parent =  (i-1)/2;
 
 			/*#ifndef NDEBUG
-				 assert(parent == i-0.5);
+				 assert(parent == i-1);
 			#endif*/
 			return parent;						
 		}
@@ -277,15 +277,24 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 	*/
    		inline void print()
    		{
+   			// int contador = 0;
    			if(isEmpty())
    			{
-   				std::cout<<BIRED<<"No hay elementos introducidos en el monticulo"<<std::endl;
+   				std::cout<<BIRED<<"No hay elementos introducidos en el monticulo"<<RESET<<std::endl;
    				return;
    			}
    			
 			std::cout<<BIYELLOW<<"DIA - MES - AGNO  PRECIPITACIONES"<<std::endl;
    			for (int i = 0; i < size(); ++i)
+   			{
    				getElement(i).escribirMedicion();
+   				/*contador++;
+  				if(contador == 70)
+  				{
+  					std::cin.ignore();
+  					contador = 0;
+  				}*/
+  			}
    		}
 	}; // Clase MonticuloMediciones
 
