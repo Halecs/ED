@@ -215,9 +215,9 @@ class Medicion
 		aux->leerFecha();
 		while(!aux->esCorrecta())
 		{
+			std::cout << CLEAR_SCREEN;
 			std::cout<<BIRED<<"Fecha incorrecta, introduzca una fecha valida"<<RESET<<std::endl;
-			//aux->leerFecha();
-			return;
+			aux->leerFecha();
 		}
 		std::cout<<BIYELLOW<<"Introduzca precipitacion de lluvia"<<std::endl;
 		std::cin>>prep;
@@ -232,7 +232,6 @@ class Medicion
 	*/
 	inline void escribirMedicion()
 	{
-		//std::cout<<BIYELLOW<<"DIA - MES - AGNO  PRECIPITACIONES"<<std::endl;
 		std::cout<<BIGREEN<<getFecha().getDia()<<"-"<<getFecha().getMes()<<"-"<<getFecha().getAgno()<<" "<<getPrecipitacion()<<std::endl;
 	}
 
