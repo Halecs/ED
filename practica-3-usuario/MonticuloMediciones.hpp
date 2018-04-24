@@ -289,7 +289,7 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
    			{
    				getElement(i).escribirMedicion();
    				contador++;
-  				if(contador == 10)
+  				if(contador == 30)
   				{
   					std::cin.ignore();
   					contador = 0;

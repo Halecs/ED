@@ -216,7 +216,8 @@ class Medicion
 		while(!aux->esCorrecta())
 		{
 			std::cout<<BIRED<<"Fecha incorrecta, introduzca una fecha valida"<<RESET<<std::endl;
-			aux->leerFecha();
+			//aux->leerFecha();
+			return;
 		}
 		std::cout<<BIYELLOW<<"Introduzca precipitacion de lluvia"<<std::endl;
 		std::cin>>prep;

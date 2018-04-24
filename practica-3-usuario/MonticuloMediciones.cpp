@@ -76,6 +76,7 @@
 		if(has(medicion))
 		{
 			std::cout<<BIRED<<"Esa medicion ya existe en el monticulo"<<RESET<<std::endl;
+			std::cin.ignore();
 			return;
 		}
 
@@ -94,7 +95,7 @@
 			}
 			else
 			{
-				std::cout<<BIRED<<"No se puede insertar la medicion porque esta lleno el monticulo"<<std::endl;
+				std::cout<<BIRED<<"No se puede insertar la medicion porque esta lleno el monticulo"<<RESET<<std::endl;
 				std::cin.ignore();
 				return;
 			}

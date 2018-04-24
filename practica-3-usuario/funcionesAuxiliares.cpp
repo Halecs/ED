@@ -34,6 +34,7 @@ void ed::cargarMonticuloDeFichero(std::string const & nombreFichero, ed::Monticu
  				monticulo.insert(aux);
  		}
 		std::cout<<BIGREEN<<"Fichero cargado con exito"<<RESET<<std::endl;
+		std::cin.ignore();
  	}
 
  	else

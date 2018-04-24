@@ -69,7 +69,7 @@ int main(){
 						break;
 					}
 					else monticulo.remove();
-					std::cout<<BIGREEN<<"Cabeza borrada"<<std::endl;
+					std::cout<<BIGREEN<<"Cabeza borrada"<<RESET<<std::endl;
 					break;
 
 			case 3: 
