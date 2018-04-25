@@ -221,6 +221,12 @@ class Medicion
 		}
 		std::cout<<BIYELLOW<<"Introduzca precipitacion de lluvia"<<std::endl;
 		std::cin>>prep;
+		while(prep < 0.0)
+		{
+			std::cout<<CLEAR_SCREEN;
+			std::cout<<BIRED<<"Precipitacion incorrecta, introduzca una precipitacion valida"<<RESET<<std::endl;
+			std::cin>>prep;
+		}
 		setFecha(*aux);
 		setPrecipitacion(prep);
 	}

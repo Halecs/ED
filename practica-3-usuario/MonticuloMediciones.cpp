@@ -112,6 +112,7 @@
 		#ifndef NDEBUG
 			assert(isEmpty() == false);
 		#endif
+			
 			if(isEmpty())
 				return;
 
