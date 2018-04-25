@@ -132,8 +132,28 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 			#endif
 			return (int)parent;						
 		}
+
+	/*! 
+		\brief   Función que ordena el monticulo de ese nodo para arriba
+		\note    Función en el cpp
+		\return  void
+		\pre     i>=1
+	*/
 		void shiftUp(int i);
+
+	/*! 
+		\brief   Función que ordena el monticulo de ese nodo para abajo
+		\note    Función en el cpp
+		\return  void
+		\pre     i>=1
+	*/
 		void shiftDown(int i);
+
+	/*! 
+		\brief   Funcion que comprueba si esta una medicion en el monticulo
+		\note    Función en el cpp
+		\return  True: Si esta, false si no.
+	*/
 		bool has(ed::Medicion &medicion) const;
 	  /////////////////////////////////////////////////////////////////////////////////////
 
