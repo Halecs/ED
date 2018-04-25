@@ -80,6 +80,11 @@ int main(){
 			//////////////////////////////////////////////////////////////////////////////
 			case 4: 
 				  	std::cout << "[4] Borrar todos los elementos del monticulo" << std::endl; 
+					if(monticulo.isEmpty())
+					{
+						std::cout<<BIRED<<"No hay elementos en el monticulo que borrar"<<std::endl;
+						break;
+					}
 					monticulo.removeAll();
 					std::cout<<BIGREEN<<"Todos los elementos borrados"<<std::endl;
 					break;
