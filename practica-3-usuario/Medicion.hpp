@@ -219,7 +219,7 @@ class Medicion
 			std::cout<<BIRED<<"Fecha incorrecta, introduzca una fecha valida"<<RESET<<std::endl;
 			aux->leerFecha();
 		}
-		std::cout<<BIYELLOW<<"Introduzca precipitacion de lluvia"<<std::endl;
+		std::cout<<BIYELLOW<<"Introduzca precipitacion de lluvia"<<RESET<<std::endl;
 		std::cin>>prep;
 		while(prep < 0.0)
 		{
