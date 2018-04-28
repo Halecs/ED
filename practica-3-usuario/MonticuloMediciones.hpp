@@ -43,7 +43,7 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 		inline ed::Medicion getElement(int i) const
 		{
 			#ifndef NDEBUG
-				assert((i>=0) && (i<366));
+				assert((i>=0) && (i<size()));
 			#endif
 			return _mediciones[i];
 		}
@@ -60,7 +60,7 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 		inline void setElement(int i, ed::Medicion &medicion)
 		{
 			#ifndef NDEBUG
-				assert((i>=0) && (i<366));
+				assert((i>=0) && (i<size()));
 			#endif
 			_mediciones[i].setFecha(medicion.getFecha());
 			_mediciones[i].setPrecipitacion(medicion.getPrecipitacion());
@@ -152,8 +152,8 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 	/*! 
 		\brief   Funcion que comprueba si esta una medicion en el monticulo
 		\note    Función en el cpp
-		\return  True: Si esta, false si no.
-	*/
+		\return  True: Si esta, false si no.	
+*/
 		bool has(ed::Medicion &medicion) const;
 	  /////////////////////////////////////////////////////////////////////////////////////
 

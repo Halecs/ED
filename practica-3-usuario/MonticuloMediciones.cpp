@@ -26,11 +26,14 @@
 			std::swap(_mediciones[i],_mediciones[getParent(i)]);
 			shiftUp(getParent(i));
 		}
-		/*#ifndef NDEBUG
-			assert(getElement(i).getPrecipitacion() > getElement(getRightChild(i)).getPrecipitacion());
+		#ifndef NDEBUG
+			/*assert(getElement(i).getPrecipitacion() > getElement(getRightChild(i)).getPrecipitacion());
 			assert(getElement(i) < getElement(getLeftChild(i)));
-			assert(getElement(i) <= getElement(getParent(i)));
-		#endif*/
+			assert(getElement(i) <= getElement(getParent(i)));*/
+        	assert((i==0 or getElement(i).getPrecipitacion()<=getElement(getParent(i)).getPrecipitacion()));
+        	assert(getLeftChild(i)>=size() or getElement(i).getPrecipitacion()>=getElement(getLeftChild(i)).getPrecipitacion());
+        	assert(getRightChild(i)>=size() or getElement(i).getPrecipitacion()>=getElement(getRightChild(i)).getPrecipitacion());
+		#endif
 	}
 
 	void ed::MonticuloMediciones::shiftDown(int i)
@@ -53,6 +56,12 @@
 			setElement(n,aux);
 			shiftDown(n);
 		}
+
+		#ifndef NDEBUG
+        assert((i==0 or getElement(i).getPrecipitacion()<=getElement(getParent(i)).getPrecipitacion()));
+        assert(getLeftChild(i)>=size() or getElement(i).getPrecipitacion()>=getElement(getLeftChild(i)).getPrecipitacion());
+        assert(getRightChild(i)>=size() or getElement(i).getPrecipitacion()>=getElement(getRightChild(i)).getPrecipitacion());
+		#endif
 	}
 
 	bool ed::MonticuloMediciones::has(ed::Medicion &medicion) const
@@ -82,16 +91,16 @@
 
 		if(size() == 0)
 		{
-			setElement(0, medicion);
 			_size++;
+			setElement(0, medicion);
 		}
 		else
 		{
 			if((size()>= 0) && (size()<366))
 			{
-				setElement(size(),medicion);
-				shiftUp(size());
 				_size++;
+				setElement(size()-1,medicion);
+				shiftUp(size()-1);
 			}
 			else
 			{
