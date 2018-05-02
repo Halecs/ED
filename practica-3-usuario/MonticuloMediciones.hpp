@@ -264,6 +264,7 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
  	*/
 		void modify(ed::Medicion &medicion);
 
+		void insertEw(ed::Medicion &medicion);
 		//! \name Operadores
 
 	/*! 

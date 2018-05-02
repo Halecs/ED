@@ -168,4 +168,27 @@
 		#endif
 	}
 
+	void ed::MonticuloMediciones::insertEw(ed::Medicion &medicion)
+	{
+		if(has(medicion))
+		{
+			std::cout<<BIRED<<"Esa medicion ya existe en el monticulo"<<RESET<<std::endl;
+			std::cin.ignore();
+			return;
+		}
 
+		if(size() == 0)
+			insert(medicion);
+		else
+		{
+			if(top().getPrecipitacion() < medicion.getPrecipitacion())
+				insert(medicion);
+			else
+			{
+				_size++;
+				setElement(size(),medicion);
+				shiftUp(size());
+			}
+		}
+
+	}
