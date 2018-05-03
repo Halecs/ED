@@ -30,7 +30,7 @@ bool ed::Fecha::esBisiesto() const
 bool ed::Fecha::esCorrecta() const
 {
 
- if (this->getAgno() > 0)
+ if ((this->getAgno() > 1000) && (this->getAgno() < 2100))
 	{
 	 if ( (this->getMes() >= 1) and (this->getMes() <= 12) )
 		{
@@ -50,7 +50,7 @@ bool ed::Fecha::esCorrecta() const
 
 					break;
 
-		  case 2: // Febrero
+		  	case 2: // Febrero
 				  // Es bisiesto
 				if ( this->esBisiesto() == true )
 				  {
@@ -69,7 +69,7 @@ bool ed::Fecha::esCorrecta() const
 					}
 					break;
 
-		 default: // Abril, Junio, Septiembre y Noviembre
+		 	default: // Abril, Junio, Septiembre y Noviembre
 					if ( (this->getDia() >= 1) and (this->getDia() <= 30) )
 						return true;
 					else
