@@ -101,7 +101,11 @@ int main(){
 			case 6: 
 					std::cout << "[6] Grabar fichero" 
 							  << std::endl;
-
+					if(monticulo.isEmpty())
+					{
+						std::cout<<BIRED<<"El monticulo esta vacio"<<std::endl;
+						break;
+					}
 					std::cout<<BIYELLOW<<"Introduzca nombre del fichero donde quiere guardar el monticulo"<<RESET<<std::endl;
 				  	std::cin>>nombreFicheroSalida;
 				  	ed::grabarMonticuloEnFichero(nombreFicheroSalida, monticulo);
