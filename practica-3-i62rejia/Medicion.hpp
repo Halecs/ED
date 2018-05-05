@@ -225,7 +225,7 @@ class Medicion
 		{
 			std::cout<<CLEAR_SCREEN;
 			std::cout<<BIRED<<"Precipitacion incorrecta, introduzca una precipitacion valida"<<RESET<<std::endl;
-			std::cout<<CYAN<<"Precipitacion --> "<<RESET<<std::endl;
+			std::cout<<CYAN<<"Precipitacion --> "<<RESET;
 			std::cin>>prep;
 		}
 		setFecha(*aux);
