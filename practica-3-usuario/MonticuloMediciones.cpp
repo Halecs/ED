@@ -181,7 +181,9 @@
 		}
 		for (int j = 1; j < 13; ++j)
 		{
-			std::cout<<CYAN<<meses[j]<<"--> "<<prep[j]/cont[j]<<RESET<<std::endl;
+			if(cont[j] == 0)
+				std::cout<<CYAN<<meses[j]<<": No hay mediciones en este mes"<<std::endl;
+			else
+				std::cout<<CYAN<<meses[j]<<"--> "<<prep[j]/cont[j]<<RESET<<std::endl;
 		}
-		std::cin.ignore();
 	}

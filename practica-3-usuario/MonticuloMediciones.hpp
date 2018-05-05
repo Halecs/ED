@@ -226,6 +226,15 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 		{
 			return getElement(i);
 		}
+
+	/*! 
+		\brief     Función que devuelve la medicion media clasificada por mes del monticulo
+		\attention Definida en el cpp
+		\return    void
+		\pre       Ninguna
+		\post      Ninguna
+	*/
+		void MediaPorMes();
 		////////////////////////////////////////////////////////////
 
 		//! \name Operaciones de modificación
@@ -263,8 +272,6 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
 		\post      old.top() != top()
  	*/
 		void modify(ed::Medicion &medicion);
-
-		void MediaPorMes();
 
 		//! \name Operadores
 
