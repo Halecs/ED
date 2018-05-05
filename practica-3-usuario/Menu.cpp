@@ -144,6 +144,17 @@ int main(){
 					else
 						std::cout<<BIGREEN<<"El tamaño del monticulo es "<<monticulo.size()<<RESET<<std::endl;
 					break;
+			case 10:
+					std::cout<<"[10] Media de precipitaciones por mes"<<std::endl;
+					if(monticulo.isEmpty())
+					{
+						std::cout<<BIRED<<"El monticulo esta vacio"<<std::endl;
+						break;
+					}
+					else
+						monticulo.MediaPorMes();
+					break;
+
 			//////////////////////////////////////////////////////////////////////////////
 			default:
 				std::cout << BIRED;

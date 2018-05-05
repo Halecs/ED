@@ -119,6 +119,9 @@ int ed::menu()
 	PLACE(posicion++,10);
 	std::cout<<"[9] Mostrar numero de elementos en el monticulo";
 
+	PLACE(posicion++,10);
+	std::cout<<"[10] Media de precipitaciones por mes";
+
 	//////////////////////////////////////////////////////////////////////////////
 	posicion++;
 

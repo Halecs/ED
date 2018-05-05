@@ -167,3 +167,21 @@
 			assert(has(medicion) == true);
 		#endif
 	}
+
+	void ed::MonticuloMediciones::MediaPorMes()
+	{
+		float cont[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+		float prep[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+		char meses[13][20] = {" ","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
+		for (int i = 0; i < size(); ++i)
+		{
+			int mes = getElement(i).getFecha().getMes();
+			prep[mes] += getElement(i).getPrecipitacion();
+			cont[mes]++;
+		}
+		for (int j = 1; j < 13; ++j)
+		{
+			std::cout<<CYAN<<meses[j]<<"--> "<<prep[j]/cont[j]<<RESET<<std::endl;
+		}
+		std::cin.ignore();
+	}

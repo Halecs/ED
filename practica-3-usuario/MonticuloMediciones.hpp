@@ -264,7 +264,8 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
  	*/
 		void modify(ed::Medicion &medicion);
 
-		void insertEw(ed::Medicion &medicion);
+		void MediaPorMes();
+
 		//! \name Operadores
 
 	/*! 
@@ -310,10 +311,12 @@ class MonticuloMediciones : public MonticuloMedicionesInterfaz
    			{
    				getElement(i).escribirMedicion();
    				contador++;
-  				if(contador == 30)
+  				if(contador == 23)
   				{
   					std::cin.ignore();
   					contador = 0;
+  					std::cout<<CLEAR_SCREEN;
+  					PLACE(2,1);
   				}
   			}
    		}
