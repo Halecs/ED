@@ -83,7 +83,6 @@ class Fecha
 	{
 		#ifndef NDEBUG
   		// Se comprueba la precondición
-//		assert(objeto.esCorrecta() == true);
 		#endif //NDEBUG
 
 		this->setDia(objeto.getDia());

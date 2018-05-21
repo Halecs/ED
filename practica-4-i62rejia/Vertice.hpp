@@ -14,28 +14,62 @@
 using std::istream;
 using std::ostream;
 
+/*!	
+\namespace ed
+\brief Espacio de nombres para la asignatura Estructuras de Datos
+*/
 namespace ed {
 
 class Vertice
 {
 	private:
-		float v_[2];
+		float x_;
+		float y_;
 		int label_;
 
 	public:
+	/*!
+	\name Constructor de la clase Vertice
+	*/
 		Vertice();
-		inline float* getData(){ return v_;};
-		inline int getLabel(){return label_;};
-		inline void setData(float* v)
+
+	/*!
+	\name Observadores de la clase Vertice
+	*/
+		inline const & float getDataX(){ return x_;};
+		inline const & float getDataY(){return y_;};
+		inline const & int getLabel(){return label_;};
+
+	/*!
+	\name Modificadores de la clase Vertice
+	*/
+/*!	
+	\brief  Método público que permite modificar el campo informativo del Vertice
+	\note   Función inline
+	\param  x: nuevo valor del campo x
+	\param  y: nuevo valor del campo y
+	\pre    Ninguna
+	\post   El campo informativo del Vertice es igual al parámetro pasado como argumento
+	\return void
+*/
+		inline void setData(float x, float y)
 		{
-			v_[0] = v[0];
-			v_[1] = v[1];
+			x_ = x;
+			y_ = y;
 
 			#ifndef NDEBUG
-				assert((abs(v_[0] - v[0])) < COTA_ERROR);
-				assert((abs(v_[1] - v[1])) < COTA_ERROR);
+				assert((abs(x_ - x)) < COTA_ERROR);
+				assert((abs(y_ - y)) < COTA_ERROR);
 			#endif
 		}
+/*!	
+	\brief  Método público que permite modificar el campo informativo del Vertice
+	\note   Función inline
+	\param  x: nuevo valor del campo informativo
+	\pre    Ninguna
+	\post   El campo informativo del Vertice es igual al parámetro pasado como argumento
+	\return void
+*/
 		inline void setLabel(int x)
 		{
 			label_ = x;
@@ -44,6 +78,38 @@ class Vertice
 				assert(getLabel() == x);
 			#endif
 
+		}
+/*!		
+	\brief  Operador de asignacion entre objetos de tipo Vertice
+	\note   Función codificada en el fichero cpp
+	\attention Función sobrecargada
+	\param  v: objeto de tipo Vertice
+	\post   El objeto actual es igual al parámetro
+	\return Devuelve una referencia al objeto actual
+*/
+		inline Vertice &operator=(const Vertice &v)
+		{
+			if(this != &v)
+			{
+				setData(v.getDataX(),v.getDataY());
+				setLabel(v.getLabel());
+			}
+			return *this;
+		}
+/*!		
+	\brief     Operador que compara el item y la etiqueta de dos vertices
+	\note      Función codificada en el fichero cpp
+	\attention Función sobrecargada
+	\param     v: objeto tipo Vertice
+	\pre       Ambos vertices deben de tener valores en item y etiqueta
+	\post      Ninguna
+	\return    Devuelve true si el item y la etiqueta son iguales; false, en caso contrario
+*/
+		inline bool operator==(const Vertice &v) const
+		{
+			return ((getLabel() == v.getLabel()) 
+				and (getDataX() == v.getDataX())
+				and (getDataY() == v.getDataY()));
 		}
 };
 
