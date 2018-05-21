@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 #ifndef _LADOHPP_
 #define _LADOHPP_
 #include "Vertice.hpp"
@@ -6,6 +6,9 @@
 class Lado
 {
 private:
+/*!		
+	\name Atributos o métodos privados
+*/
 	Vertice x;
 	Vertice y;
 	float distance;
@@ -213,5 +216,5 @@ class Lado:
 };	//clase lado
 }	//namespace
 
->>>>>>> master
+
 #endif

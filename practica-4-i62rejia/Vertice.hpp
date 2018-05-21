@@ -23,6 +23,9 @@ namespace ed {
 class Vertice
 {
 	private:
+	/*!		
+	\name Atributos o métodos privados
+	*/
 		float x_;
 		float y_;
 		int label_;
