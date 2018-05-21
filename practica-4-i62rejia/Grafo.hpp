@@ -41,7 +41,7 @@ class Grafo
 	*/
 		std::vector<ed::Vertice> _vertices; //!< Vector de vertices
 		std::vector<ed::Lado> _lados;		//!< Vector de lados
-		std::vector< std::vector<int> > Matrix;	//!< Matrix de adyacencia
+		std::vector< std::vector<int> > _Matrix;	//!< Matrix de adyacencia
 
 		int _dirigido; //!< Define si es dirigido o no, 1 -> Dirigido   0 -> No dirigido 
 
@@ -59,7 +59,7 @@ class Grafo
 	*/
 		inline Grafo(int dirigido = 0)
 		{
-			Matrix.resize(0);
+			_Matrix.resize(0);
 			_vertices.resize(0);
 			_lados.resize(0);
 			_dirigido = dirigido;
@@ -207,7 +207,6 @@ class Grafo
 			l.setSecond(u);
 			_lados.push_back(l);
 			//Ajustar adyacencias
-
 		}
 
 }; //class Grafo

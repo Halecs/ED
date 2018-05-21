@@ -1,64 +1,39 @@
-NAME=Principal
+OBJETOS = Vertice.o Lado.o Grafo.o Funcionesauxiliares.o principal.o
 
-#
-OBJECTS = $(NAME).o Grafo.o Grafo.o
+CPPFLAGS = -c -g -Wall -ansi
 
-#
-CPPFLAGS = -c -g -Wall -ansi -O2
+INCLUDES = Grafo.hpp Lado.hpp	Vertice.hpp 
 
-INCLUDES = Vertice.hpp macros.hpp
+objetivo: principal.exe
 
-# Macros predefinidas
-#
-# $@: nombre del objetivo
-# $^: todas las dependencias
-# $<: primera dependencia
-#
 
-objetivo: $(NAME).exe
-
-#Opciones para NO depurar los asertos
+#Opciones para NO depurar
 ndebug: CPPFLAGS += -DNDEBUG 
 ndebug: objetivo
 
-# Primer objetivo 
-$(NAME).exe: $(OBJECTS)
-			@echo "Generando " $@
-			@g++ $^ -o $@
-#
-$(NAME).o: $(NAME).cpp $(INCLUDES)
-			@echo "Compilando " $<
-			@g++ $(CPPFLAGS) $<
-
-#
-#funcionesAuxiliares.o: funcionesAuxiliares.cpp $(INCLUDES)
-			# @echo "Compilando " $<
-			# @g++ $(CPPFLAGS) $<
-
-#
-Vertice.o: Vertice.cpp Vertice.hpp 
-			@echo "Compilando " $<
-			@g++ $(CPPFLAGS) $<
-
-#
-Grafo.o: Grafo.cpp Grafo.hpp  Vertice.hpp 
-			@echo "Compilando " $<
-			@g++ $(CPPFLAGS) $<
-
-
-
-
-
-
-
-# Generación de la documentación
+#Para general a documentacion
 doc: Doxyfile 
-	@echo "Generando la documentación con doxygen"
-	@doxygen
+		doxygen
 
-# Borrado
-.PHONY: clean  
+
+
+principal.exe: $(OBJETOS)
+									g++ $(OBJETOS) -o principal.exe 	 
+
+principal.o: principal.cpp funcionesauxiliares.hpp grafo.hpp $(INCLUDES)
+								g++ $(CPPFLAGS) principal.cpp
+
+funcionesauxiliares.o: funcionesauxiliares.cpp funcionesauxiliares.hpp  $(INCLUDES)
+											g++ $(CPPFLAGS) funcionesauxiliares.cpp
+
+grafo.o: 	grafo.cpp $(INCLUDES)
+								g++ $(CPPFLAGS) grafo.cpp
+
+lado.o: lado.cpp $(INCLUDES)
+							g++ $(CPPFLAGS) lado.cpp
+
+vertice.o: vertice.cpp vertice.hpp
+							g++ $(CPPFLAGS) vertice.cpp
+
 clean:
-	@echo "Borrando los ficheros superfluos"
-	@rm -f $(OBJECTS) *~ 
-
+	rm -rf *~ $(OBJETOS)
