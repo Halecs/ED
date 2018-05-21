@@ -30,7 +30,7 @@ namespace ed{
 \note  Hereda de la clase LadoInterfaz
 */
 
-class Lado:
+class Lado
 {
 
 /*!		
@@ -83,9 +83,9 @@ class Lado:
 	\return	   Devuelve true si el vertice v es un extremo del lado, false en caso contrario
 	\sa    	   getPrimero, getSegundo
 	*/
-		inline bool has(ed::Vertice v)
+		inline bool has(ed::Vertice v) const
 		{
-			if( v == getPrimero() || v==getSegundo())
+			if( v == first() || v==second())
 				return true;
 			return false;
 		}
@@ -98,7 +98,7 @@ class Lado:
 	\return	   Devuelve el vertice que se encuentra en el extremo opuesto a v
 	\sa    	   tiene,getPrimero,getSegundo
 	*/
-		inline ed::Vertice other(ed::Vertice v)
+		inline ed::Vertice other(ed::Vertice v) const
 		{
 			#ifndef NDEBUG
 				assert(has(v));
@@ -153,7 +153,7 @@ class Lado:
 	*/
 		inline void setItem(const double & item)
 		{
-			getItem() = item;
+			_item = item;
 			#ifndef NDEBUG
 				assert(getItem() == item);
 			#endif
@@ -169,7 +169,7 @@ class Lado:
 	*/
 		inline void setFirst(const ed::Vertice &v)
 		{
-			first() = v;
+			_origen = v;
 			#ifndef NDEBUG
 				assert(first() == v);
 			#endif
@@ -185,12 +185,46 @@ class Lado:
 	*/
 		inline void setSecond(const ed::Vertice &v)
 		{
-			second() = v;
+			_destino = v;
 			#ifndef NDEBUG
 				assert(second() == v);
 			#endif
 		}
 
+/*!		
+	\brief     Operador que compara dos lados
+	\note      Función inline
+	\attention Función sobrecargada
+	\param     v: objeto tipo Lado
+	\pre       Ambos vertices deben de tener valores en item y etiqueta
+	\post      Ninguna
+	\return    Devuelve true si el item y la etiqueta son iguales; false, en caso contrario
+*/
+		inline bool operator==(const Lado &l) const
+		{
+			return ((getItem() == l.getItem()) 
+				and (first() == l.first())
+				and (second() == l.second()));
+		}
+
+/*!		
+	\brief  Operador de asignacion entre objetos de tipo Vertice
+	\note   Función inline
+	\attention Función sobrecargada
+	\param  v: objeto de tipo Vertice
+	\post   El objeto actual es igual al parámetro
+	\return Devuelve una referencia al objeto actual
+*/
+		inline Lado &operator=(const Lado &l)
+		{
+			if(this != &l)
+			{
+				setItem(l.getItem());
+				setFirst(l.first());
+				setSecond(l.second());
+			}
+			return *this;
+		}
 
 };	//clase lado
 }	//namespace

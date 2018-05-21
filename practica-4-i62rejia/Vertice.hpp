@@ -46,7 +46,7 @@ class Vertice
 	\post   Ninguna
 	\return const float, el valor de la coordenada
 */
-		inline const & float getDataX(){ return x_;};
+		inline const float & getDataX()const { return x_;};
 
 /*!	
 	\brief  Método público que devuelve la coordenada y del vertice
@@ -55,7 +55,7 @@ class Vertice
 	\post   Ninguna
 	\return const float, el valor de la coordenada
 */
-		inline const & float getDataY(){return y_;};
+		inline const float & getDataY()const {return y_;};
 
 /*!	
 	\brief  Método público que devuelve el nombre del vertice
@@ -64,7 +64,7 @@ class Vertice
 	\post   Ninguna
 	\return const int, el nombre
 */
-		inline const & int getLabel(){return label_;};
+		inline const int & getLabel()const {return label_;};
 
 	/*!
 	\name Modificadores de la clase Vertice
@@ -107,7 +107,7 @@ class Vertice
 		}
 /*!		
 	\brief  Operador de asignacion entre objetos de tipo Vertice
-	\note   Función codificada en el fichero cpp
+	\note   Función inline
 	\attention Función sobrecargada
 	\param  v: objeto de tipo Vertice
 	\post   El objeto actual es igual al parámetro
@@ -124,7 +124,7 @@ class Vertice
 		}
 /*!		
 	\brief     Operador que compara el item y la etiqueta de dos vertices
-	\note      Función codificada en el fichero cpp
+	\note      Función inline
 	\attention Función sobrecargada
 	\param     v: objeto tipo Vertice
 	\pre       Ambos vertices deben de tener valores en item y etiqueta

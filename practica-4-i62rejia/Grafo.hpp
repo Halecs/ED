@@ -45,7 +45,7 @@ class Grafo
 
 		int _dirigido;  //!< Define si es dirigido o no, 1 -> Dirigido   0 -> No dirigido 
 		int _CurVertex; //!< Cursor del vertice
-		int _CurEdge	//!< Cursor del lado
+		int _CurEdge;	//!< Cursor del lado
 
 	public:
 	/*!
@@ -111,10 +111,9 @@ class Grafo
 			#ifndef NDEBUG
 				assert(!isEmpty());
 			#endif
-			int i;
 			for (int i = 0; i < _lados.size(); ++i)
 			{
-				if((_lados[i].first() == u && _lados.second() == v) or (_lados[i].first() == v && _lados.second() == u))
+				if((_lados[i].first() == u && _lados[i].second() == v) or (_lados[i].first() == v && _lados[i].second() == u))
 					return true;
 			}
 			return false;
@@ -122,19 +121,20 @@ class Grafo
 
 		inline const ed::Vertice currVertex() const
 		{
-			#ifndef NDEBUG
+			/*#ifndef NDEBUG
 				assert(hasCurrVertex());
-			#endif
+			#endif*/
 				return _vertices[_CurVertex];
 		}
 
 		inline const ed::Lado currEdge() const
 		{
-			#ifndef NDEBUG
+			/*#ifndef NDEBUG
 				assert(hasCurrEdge());
-			#endif
+			#endif*/
 				return _lados[_CurEdge];
 		}
+
 	/*!		
 	\brief     Comprueba si existe el vertice
 	\note      Función inline
@@ -143,10 +143,10 @@ class Grafo
 	\post	   Ninguna
 	\return    Devuelve true si hay, false si no
 	*/
-		inline bool hasCurrVertex(ed::Vertice v) const
+		inline bool existeVertice(ed::Vertice v) const
 		{
 			#ifndef NDEBUG
-				assert(!isEmpty);
+				assert(!isEmpty());
 			#endif
 
 			int i;
@@ -165,10 +165,10 @@ class Grafo
 	\post	   Ninguna
 	\return    Devuelve true si hay, false si no
 	*/
-		inline bool hasCurrEdge(ed::Lado l)
+		inline bool existeLado(ed::Lado l)
 		{
 			#ifndef NDEBUG
-				assert(!isEmpty);
+				assert(!isEmpty());
 			#endif
 
 			int i;
@@ -194,10 +194,10 @@ class Grafo
 			_vertices.push_back(u);
 		//Queda ajustar adyacencia
 
-			#ifndef NDEBUG
+			/*#ifndef NDEBUG
 				assert(hasCurrVertex());
 				assert(currVertex().getDataX() == u.getDataX() && currVertex().getDataY() == u.getDataY());
-			#endif
+			#endif*/
 		}
 
 		inline void addEdge(ed::Vertice v, ed::Vertice u, double distance)

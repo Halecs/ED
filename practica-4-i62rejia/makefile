@@ -1,39 +1,70 @@
-OBJETOS = Vertice.o Lado.o Grafo.o Funcionesauxiliares.o principal.o
+NAME=principal
 
-CPPFLAGS = -c -g -Wall -ansi
+#
+OBJECTS = $(NAME).o FuncionesAuxiliares.o Grafo.o Vertice.o Lado.o
 
-INCLUDES = Grafo.hpp Lado.hpp	Vertice.hpp 
+#
+CPPFLAGS = -c -g -Wall -ansi -O2
 
-objetivo: principal.exe
+INCLUDES = FuncionesAuxiliares.hpp Grafo.hpp Vertice.hpp Lado.hpp macros.hpp
 
+# Macros predefinidas
+#
+# $@: nombre del objetivo
+# $^: todas las dependencias
+# $<: primera dependencia
+#
 
-#Opciones para NO depurar
+objetivo: $(NAME).exe
+
+#Opciones para NO depurar los asertos
 ndebug: CPPFLAGS += -DNDEBUG 
 ndebug: objetivo
 
-#Para general a documentacion
+# Primer objetivo 
+$(NAME).exe: $(OBJECTS)
+			@echo "Generando " $@
+			@g++ $^ -o $@
+#
+$(NAME).o: $(NAME).cpp $(INCLUDES)
+			@echo "Compilando " $<
+			@g++ $(CPPFLAGS) $<
+
+#
+FuncionesAuxiliares.o: FuncionesAuxiliares.cpp $(INCLUDES)
+			@echo "Compilando " $<
+			@g++ $(CPPFLAGS) $<
+
+#
+Vertice.o: Vertice.cpp Vertice.hpp 
+			@echo "Compilando " $<
+			@g++ $(CPPFLAGS) $<
+
+#
+Lado.o: Lado.cpp Lado.hpp  Vertice.hpp 
+			@echo "Compilando " $<
+			@g++ $(CPPFLAGS) $<
+
+
+#
+Grafo.o: Grafo.cpp Grafo.hpp \
+						Lado.hpp \
+						Vertice.hpp
+			@echo "Compilando " $<
+			@g++ $(CPPFLAGS) $<
+
+
+
+
+
+# Generación de la documentación
 doc: Doxyfile 
-		doxygen
-
-
-
-principal.exe: $(OBJETOS)
-									g++ $(OBJETOS) -o principal.exe 	 
-
-principal.o: principal.cpp funcionesauxiliares.hpp grafo.hpp $(INCLUDES)
-								g++ $(CPPFLAGS) principal.cpp
-
-funcionesauxiliares.o: funcionesauxiliares.cpp funcionesauxiliares.hpp  $(INCLUDES)
-											g++ $(CPPFLAGS) funcionesauxiliares.cpp
-
-grafo.o: 	grafo.cpp $(INCLUDES)
-								g++ $(CPPFLAGS) grafo.cpp
-
-lado.o: lado.cpp $(INCLUDES)
-							g++ $(CPPFLAGS) lado.cpp
-
-vertice.o: vertice.cpp vertice.hpp
-							g++ $(CPPFLAGS) vertice.cpp
-
+	@echo "Generando la documentación con doxygen"
+	@doxygen
+  
+# Borrado
+.PHONY: clean  
 clean:
-	rm -rf *~ $(OBJETOS)
+	@echo "Borrando los ficheros superfluos"
+	@rm -f $(OBJECTS) *~ 
+
