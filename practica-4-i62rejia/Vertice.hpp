@@ -19,21 +19,23 @@ namespace ed {
 class Vertice
 {
 	private:
-		float v_[2];
+		float x_;
+		float y_;
 		int label_;
 
 	public:
 		Vertice();
-		inline float* getData(){ return v_;};
+		inline float getDataX(){ return x_;};
+		inline float getDataY(){return y_;};
 		inline int getLabel(){return label_;};
-		inline void setData(float* v)
+		inline void setData(float x, float y)
 		{
-			v_[0] = v[0];
-			v_[1] = v[1];
+			x_ = x;
+			y_ = y;
 
 			#ifndef NDEBUG
-				assert((abs(v_[0] - v[0])) < COTA_ERROR);
-				assert((abs(v_[1] - v[1])) < COTA_ERROR);
+				assert((abs(x_ - x)) < COTA_ERROR);
+				assert((abs(y_ - y)) < COTA_ERROR);
 			#endif
 		}
 		inline void setLabel(int x)

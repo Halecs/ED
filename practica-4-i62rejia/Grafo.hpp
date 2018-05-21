@@ -16,7 +16,6 @@ class Grafo
 {
 	private:
 		std::vector< std::vector<int> > Matrix;
-		std::vector< std::vector<int> >::iterator cursor;
 
 	public:
 		inline Grafo()
@@ -33,6 +32,17 @@ class Grafo
 
 		inline bool adjacent(Vertice u, Vertice v)
 		{
+
+		}
+
+		inline bool hasCurrVertex()
+		{
+
+		}
+
+		inline void addVertex(Vertice u)
+		{
+			Matrix.push_back(std::vector<int> (1,0));
 
 		}
 
