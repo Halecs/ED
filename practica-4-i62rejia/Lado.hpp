@@ -61,6 +61,7 @@ class Lado:
 	/*!
 	\name Observadores de la clase Lado
 	*/
+		
 	/*!		
 	\brief     Observador del item del lado
 	\note      Función inline

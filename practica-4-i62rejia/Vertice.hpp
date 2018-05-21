@@ -28,10 +28,21 @@ class Vertice
 		int label_;
 
 	public:
+	/*!
+	\name Constructor de la clase Vertice
+	*/
 		Vertice();
+
+	/*!
+	\name Observadores de la clase Vertice
+	*/
 		inline const & float getDataX(){ return x_;};
 		inline const & float getDataY(){return y_;};
 		inline const & int getLabel(){return label_;};
+
+	/*!
+	\name Modificadores de la clase Vertice
+	*/
 /*!	
 	\brief  Método público que permite modificar el campo informativo del Vertice
 	\note   Función inline
