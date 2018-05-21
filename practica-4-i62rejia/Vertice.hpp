@@ -26,9 +26,9 @@ class Vertice
 	/*!		
 	\name Atributos o métodos privados
 	*/
-		float x_;
-		float y_;
-		int label_;
+		float x_;	//!< Coordenada x del vertice
+		float y_;	//!< Coordenada y del vertice
+		int label_; //!< Nombre del vertice (Unico)
 
 	public:
 	/*!
@@ -39,8 +39,31 @@ class Vertice
 	/*!
 	\name Observadores de la clase Vertice
 	*/
+/*!	
+	\brief  Método público que devuelve la coordenada x del vertice
+	\note   Función inline
+	\pre    Ninguna
+	\post   Ninguna
+	\return const float, el valor de la coordenada
+*/
 		inline const & float getDataX(){ return x_;};
+
+/*!	
+	\brief  Método público que devuelve la coordenada y del vertice
+	\note   Función inline
+	\pre    Ninguna
+	\post   Ninguna
+	\return const float, el valor de la coordenada
+*/
 		inline const & float getDataY(){return y_;};
+
+/*!	
+	\brief  Método público que devuelve el nombre del vertice
+	\note   Función inline
+	\pre    Ninguna
+	\post   Ninguna
+	\return const int, el nombre
+*/
 		inline const & int getLabel(){return label_;};
 
 	/*!

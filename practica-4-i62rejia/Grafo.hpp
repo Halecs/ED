@@ -43,7 +43,9 @@ class Grafo
 		std::vector<ed::Lado> _lados;		//!< Vector de lados
 		std::vector< std::vector<int> > _Matrix;	//!< Matrix de adyacencia
 
-		int _dirigido; //!< Define si es dirigido o no, 1 -> Dirigido   0 -> No dirigido 
+		int _dirigido;  //!< Define si es dirigido o no, 1 -> Dirigido   0 -> No dirigido 
+		int _CurVertex; //!< Cursor del vertice
+		int _CurEdge	//!< Cursor del lado
 
 	public:
 	/*!
@@ -76,7 +78,7 @@ class Grafo
 	\post	   Ninguna
 	\return    Devuelve true si el grafo estaba vacio, falso en caso contrario
 	*/	
-		inline bool isEmpty()
+		inline bool isEmpty() const
 		{
 			if(_vertices.size() == 0 && _lados.size() == 0)
 				return true;
@@ -89,7 +91,7 @@ class Grafo
 	\post	   Ninguna
 	\return    Devuelve true si es dirigido el grafo, false en caso contrario
 	*/
-		inline bool isDirected()
+		inline bool isDirected() const
 		{
 			if(_dirigido == 1)
 				return true;
@@ -104,7 +106,7 @@ class Grafo
 	\post	   Ninguna
 	\return    Devuelve true si hay, false si no
 	*/
-		inline bool adjacent(ed::Vertice u, ed::Vertice v)
+		inline bool adjacent(ed::Vertice u, ed::Vertice v) const
 		{
 			#ifndef NDEBUG
 				assert(!isEmpty());
@@ -118,18 +120,20 @@ class Grafo
 			return false;
 		}
 
-		inline ed::Vertice currVertex()
+		inline const ed::Vertice currVertex() const
 		{
 			#ifndef NDEBUG
 				assert(hasCurrVertex());
 			#endif
+				return _vertices[_CurVertex];
 		}
 
-		inline ed::Lado currEdge()
+		inline const ed::Lado currEdge() const
 		{
 			#ifndef NDEBUG
 				assert(hasCurrEdge());
 			#endif
+				return _lados[_CurEdge];
 		}
 	/*!		
 	\brief     Comprueba si existe el vertice
@@ -139,7 +143,7 @@ class Grafo
 	\post	   Ninguna
 	\return    Devuelve true si hay, false si no
 	*/
-		inline bool hasCurrVertex(ed::Vertice v)
+		inline bool hasCurrVertex(ed::Vertice v) const
 		{
 			#ifndef NDEBUG
 				assert(!isEmpty);

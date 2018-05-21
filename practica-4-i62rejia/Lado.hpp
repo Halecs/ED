@@ -1,24 +1,3 @@
-
-#ifndef _LADOHPP_
-#define _LADOHPP_
-#include "Vertice.hpp"
-
-class Lado
-{
-private:
-/*!		
-	\name Atributos o métodos privados
-*/
-	Vertice x;
-	Vertice y;
-	float distance;
-	
-public:
-	Lado();
-	
-};
-
-=======
 /*! 	
 	\file    Lado.hpp
 	\brief   Declaración del TAD Lado
