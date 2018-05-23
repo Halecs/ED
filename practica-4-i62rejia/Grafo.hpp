@@ -176,6 +176,7 @@ class Grafo
 			/*#ifndef NDEBUG
 				assert(hasCurrEdge());
 			#endif*/
+
 				return _lados[_curEdge];
 		}
 
@@ -221,10 +222,45 @@ class Grafo
 			return false;
 		}
 
+	/*!		
+	\brief     Comprueba el numero de vertices del Grafo
+	\note      Función inline
+	\pre   	   ninguna
+	\post	   Ninguna
+	\return    Devuelve un entero que representa el numero de elementos en el vector
+	*/
+		inline int nVertices()
+		{
+			return _vertices.size();
+		}
+
+	/*!		
+	\brief     Imprime la matriz de adyacencia
+	\note      Función inline
+	\pre   	   ninguna
+	\post	   Ninguna
+	\return    void
+	*/
+		inline void printMatriz(){
+			int i,j;
+			for(i=0; i< nVertices(); i++){
+				for(j=0; j< nVertices(); j++){
+					printf("[%d] [%d]: ",i,j);
+					std::cout<< _Matrix[i][j]<<std::endl;
+				}	
+			}	
+		}
 
 		/*!
 			\name Modificadores de la clase Grafo
 		*/
+	/*!
+	\brief Reestructura la matriz de forma que comprueba que esten todos los lados puestos y tenga el tamaño adecuado.
+	\note	Funcion hecha en el cpp
+	\pre  Ninguna
+	\post Ninguna
+	*/
+		void ajustarAdyacencias();
 
 	/*!
 	\brief Añade un vertice al grafo a partir del data
@@ -241,7 +277,7 @@ class Grafo
 
 			u.setLabel(_vertices.size() + 1);
 			_vertices.push_back(u);
-			//Queda ajustar adyacencia
+			ajustarAdyacencias();
 
 			_curVertex =(int) _vertices.size() - 1 ;
 			#ifndef NDEBUG
@@ -262,7 +298,7 @@ class Grafo
 			l.setFirst(v);
 			l.setSecond(u);
 			_lados.push_back(l);
-			//Ajustar adyacencias
+			ajustarAdyacencias();
 
 			_curEdge = (int) _lados.size() - 1;
 			#ifndef NDEBUG
@@ -281,7 +317,7 @@ class Grafo
 			#endif
 				
 			_vertices.erase(_vertices.begin() + _curVertex);
-			//Ajustar Adyacencias
+			ajustarAdyacencias();
 		}
 
 		inline void removeEdge()
@@ -291,7 +327,7 @@ class Grafo
 			#endif
 
 			_lados.erase(_lados.begin() + _curEdge);
-			//Ajustar adyacencias
+			ajustarAdyacencias();
 		}
 
 	/*!
@@ -378,15 +414,117 @@ class Grafo
 		void findFirstEdge(double p)
 		{
 			#ifndef NDEBUG
-				assert(hasCurrVertex())
+				assert(hasCurrVertex());
 			#endif
 
 			#ifndef NDEBUG
 				if(hasCurrEdge())
-					assert(abs(currEdge().getItem() - peso) < COTA_ERROR);
+					assert(abs(currEdge().getItem() - p) < COTA_ERROR);
 			#endif
 		}
 
+		void findNextEdge(double p)
+		{
+			#ifndef NDEBUG
+				assert(hasCurrVertex());
+			#endif
+
+			#ifndef NDEBUG
+				if(hasCurrEdge())
+					assert(abs(currEdge().getItem() - p) < COTA_ERROR);
+			#endif
+		}
+
+		void goToVertex(ed::Vertice v)
+		{
+			#ifndef NDEBUG
+				assert(existeVertice(v));
+			#endif
+				for (int i = 0; i < (int)_vertices.size(); ++i)
+				{
+					if(v.getLabel() == _vertices[i].getLabel())
+						_curVertex = i;
+				}
+			#ifndef NDEBUG
+				assert((abs(currVertex().getDataX() - v.getDataX()) < COTA_ERROR) 
+					&& (abs(currVertex().getDataY() - v.getDataY()) < COTA_ERROR));
+			#endif
+		}
+
+		void goToEdge(ed::Vertice u, ed::Vertice v)
+		{
+			#ifndef NDEBUG
+				assert(existeVertice(u));
+				assert(existeVertice(v));				
+			#endif
+				bool xd;
+				for (int i = 0; i < (int)_lados.size(); ++i)
+				{
+					if(_lados[i].first() == u && _lados[i].second() == v)
+					{
+						_curEdge = i;
+						xd = true;
+					}
+				}
+				if(xd == false)
+					_curEdge = -1;
+			#ifndef NDEBUG
+				if(hasCurrEdge())
+					assert(currVertex() == u
+						&& currEdge().first() == u
+						&& currEdge().second() == v);
+			#endif
+		}
+
+		inline void goToFirstVertex()
+		{
+			if(!isEmpty())
+				_curVertex = 0;
+			else
+				_curVertex = -1;
+			#ifndef NDEBUG
+				if(isEmpty())
+					assert(!hasCurrVertex());
+			#endif
+		}
+		inline void nextVertex()
+		{
+			#ifndef NDEBUG
+				assert(hasCurrVertex());
+			#endif
+				if (_curVertex < _vertices.size() -1)
+					_curVertex++;
+				else
+					_curVertex = -1;
+		}
+
+		inline void goToFirstEdge()
+		{
+			#ifndef NDEBUG
+				assert(hasCurrVertex());
+			#endif
+			_curEdge = 0;
+			_curVertex = currEdge().first().getLabel() -1;
+			#ifndef NDEBUG
+				if(hasCurrEdge() && isDirected())
+					assert(currVertex() == currEdge().first());
+			#endif
+		}
+
+		inline void nextEdge()
+		{
+			#ifndef NDEBUG
+				assert(hasCurrEdge());
+			#endif
+				_curEdge++;
+				_curVertex = currEdge().first().getLabel() - 1;
+			#ifndef NDEBUG
+				if(hasCurrEdge() && isDirected())
+					assert(currVertex() == currEdge().first());
+				if(hasCurrEdge() && !isDirected())
+					assert(currEdge().has(currVertex()));
+			#endif
+		}
 
 }; //class Grafo
 } //namespace

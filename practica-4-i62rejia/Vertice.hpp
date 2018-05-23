@@ -137,11 +137,28 @@ class Vertice
 				and (getDataX() == v.getDataX())
 				and (getDataY() == v.getDataY()));
 		}
+
+/*!		
+	\brief  Operador de extracción  
+	\param  o: flujo de salida
+	\param  v: objeto de tipo Vertice  
+	\pre    El vertice del parametro debe existir
+	\post   Se escriben los valores de los atributos del Vertice en flujo de salida
+	\return Devuelve el stream de salida
+*/
+	friend std::ostream &operator<<(std::ostream &o, const Vertice &v);
+
+/*!
+	\brief  Operador de entrada  
+	\param  o: flujo de entrada
+	\param  v: objeto de tipo Vertice  
+	\pre    El vertice del parametro debe existir
+	\post   Se escriben los valores de los atributos del Vertice en flujo de entrada
+	\return Devuelve el stream de entrada
+*/
+	friend std::istream &operator>>(istream &stream, Vertice &v);
+
 };
-
-
-
-
 
 } //end namespace ed
 
