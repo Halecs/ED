@@ -15,23 +15,52 @@
 		std::ifstream fich( nombreFichero.c_str() );
 		if(!fich)
 		{
-			std::cout<<"No existe el fichero"<<std::endl;
+			std::cout<<BIRED<<"No existe el fichero"<<std::endl;
+			std::cin.ignore();
 			return;
 		}
 		while(fich>>aux)
+		{
+			if(!grafo.existeVertice(aux))
 			grafo.addVertex(aux);
-
+		}
+		std::cout<<BIGREEN<<"Fichero cargado con exito"<<RESET<<std::endl;
+		std::cin.ignore();
 		fich.close();
 	}
 
-	void ed::grabarGrafoaFichero(std::string const & nombreFichero, ed::Grafo const & grafo)
+	void ed::grabarGrafoaFichero(std::string const & nombreFichero, ed::Grafo & grafo)
 	{
-		std::ofstream fich(nombreFichero.c_str());
-		for (int i = 0; i < grafo.nVertices(); ++i)
+		if(grafo.isEmpty())
 		{
-			/* code */
+			std::cout<<BIRED<<"El grafo esta vacio, no hay nada que guardar"<<RESET<<std::endl;
+			std::cin.ignore();
+			return;
 		}
+		std::ofstream fich(nombreFichero.c_str());
+		grafo.goToFirstVertex();
+		while(grafo.hasCurrVertex())
+		{
+			fich<<grafo.currVertex();
+			grafo.nextVertex();
+		}
+		std::cout<<BIGREEN<<"Fichero guardado con exito"<<RESET<<std::endl;
 		fich.close();
+	}
+
+
+	void ed::estaVacio(ed::Grafo const & grafo)
+	{
+    	if(grafo.isEmpty())
+    	{
+       		std::cout<<BIRED<<"El grafo está vacio"<<RESET<<std::endl;
+       		return;
+    	}
+		else
+		{
+      		std::cout<<BIGREEN<<"El grafo tiene "<<grafo.nVertices()<<" vertices"<<RESET<<std::endl;
+      		return;
+      	}
 	}
 
 //Menu de la p3, queda modificarlo

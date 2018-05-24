@@ -16,7 +16,8 @@
 namespace ed{
 	int menu();
 	void cargarGrafoDesdeFichero(std::string const & nombreFichero, ed::Grafo & grafo);
-	void grabarGrafoaFichero(std::string const & nombreFichero, ed::Grafo const & grafo);
+	void grabarGrafoaFichero(std::string const & nombreFichero, ed::Grafo & grafo);
+	void estaVacio(ed::Grafo const & grafo);
 }
 
 

@@ -31,3 +31,37 @@ void ed::Grafo::ajustarAdyacencias()
 		}
 	}
 }
+
+ed::Grafo ed::Grafo::kruskal()
+{
+	ed::Grafo coste_minimo;
+	if(isEmpty())
+	{
+		std::cout<<BIRED<<"No hay grafo al que aplicar el algoritmo"<<RESET<<std::endl;
+		std::cin.ignore();
+	}
+	else
+	{
+		std::sort(_lados.begin(),_lados.end(), this->sortLados);
+		std::vector<bool> test;
+		test.resize(nVertices(), false);
+		for (int i = 0; i < nVertices(); ++i)
+			coste_minimo.addVertexN(_vertices[i].getDataX(), _vertices[i].getDataY());
+
+		for (int i = 0; i < (int)_lados.size(); ++i)
+		{
+			int a = _lados[i].first().getLabel() -1;
+			int b = _lados[i].second().getLabel() -1;
+			if((test[a] == false)
+				or (test[b] == false))
+			{
+				coste_minimo.addEdge(_lados[i].first(),_lados[i].second());
+				// a = _lados[i].first().getLabel() -1;
+				// b = _lados[i].second().getLabel() -1;
+				test[a] = true;
+				test[b] = true;
+			}
+		}
+	}
+	return coste_minimo;
+}

@@ -192,10 +192,6 @@ class Grafo
 	*/
 		inline bool existeVertice(ed::Vertice v) const
 		{
-			#ifndef NDEBUG
-				assert(!isEmpty());
-			#endif
-
 			for (int i=0; i<(int)_vertices.size();i++){
 				if(_vertices[i] == v )
 					return true;
@@ -213,10 +209,6 @@ class Grafo
 	*/
 		bool existeLado(ed::Lado l) const
 		{
-			#ifndef NDEBUG
-				assert(!isEmpty());
-			#endif
-
 			for (int i=0; i<(int)_lados.size();i++){
 				if(_lados[i] == l )
 					return true;
@@ -253,6 +245,15 @@ class Grafo
 			}	
 		}
 
+	/*!		
+	\brief     Calcula el peso del lado
+	\note      Función inline
+	\param 	   u: primer vertice del lado
+	\param 	   v: segundo vertice del lado
+	\pre   	   ninguna
+	\post	   Ninguna
+	\return    void
+	*/
 		inline double calcularPeso(ed::Vertice u, ed::Vertice v) const
 		{
 			double resultado;
@@ -261,6 +262,8 @@ class Grafo
 			resultado = sqrt(totalx + totaly);
 			return resultado;
 		}
+
+		inline static bool sortLados(Lado a, Lado b){return a.getItem() < b.getItem();}
 
 		/*!
 			\name Modificadores de la clase Grafo
@@ -294,7 +297,7 @@ class Grafo
 			{
 				if(u.getLabel() != _vertices[i].getLabel())
 				{
-					addEdge(u, _vertices[i], calcularPeso(u,_vertices[i]));
+					addEdge(u, _vertices[i]);
 				}
 			}
 
@@ -305,30 +308,66 @@ class Grafo
 			#endif
 		}
 
-		void addEdge(ed::Vertice v, ed::Vertice u, double distance)
+		void addVertexN(float x, float y)
+		{
+			ed::Vertice a;
+			/*if(!isEmpty() && existeVertice(a))
+			{
+				std::cout<<BIRED<<"Ya existe el vertice a introducir, error"<<RESET<<std::endl;
+				std::cin.ignore();
+				return;
+			}*/
+
+			a.setData(x, y);
+			a.setLabel(_vertices.size() + 1);
+			_vertices.push_back(a);
+			ajustarAdyacencias();
+
+			_curVertex =(int) _vertices.size() - 1 ;
+			#ifndef NDEBUG
+				assert(hasCurrVertex());
+				assert(currVertex().getDataX() == a.getDataX() && currVertex().getDataY() == a.getDataY());
+			#endif
+		}
+
+	/*!
+	\brief Añade un lado al grafo a partir del data
+	\note Aumentamos el numero de lados en 1.
+	\param v: dato tipo vertice
+	\param u: dato tipo vertice
+	\pre existeVertice(u)
+	\post hasCurrEdge()
+	*/
+		void addEdge(ed::Vertice v, ed::Vertice u)
 		{
 			#ifndef NDEBUG
-				 assert(existeVertice(v));
-				 assert(existeVertice(u));				
+				 // assert(existeVertice(v));
+				 // assert(existeVertice(u));				
 			#endif
 			ed::Lado l;
-			l.setItem(distance);
+			l.setItem(calcularPeso(v, u));
 			l.setFirst(v);
 			l.setSecond(u);
 			_lados.push_back(l);
-			_Matrix[l.first().getLabel()-1][l.second().getLabel()-1] = distance;
-			_Matrix[l.second().getLabel()-1][l.first().getLabel()-1] = distance;
+			_Matrix[l.first().getLabel()-1][l.second().getLabel()-1] = l.getItem();
+			_Matrix[l.second().getLabel()-1][l.first().getLabel()-1] = l.getItem();
 
 			_curEdge = (int) _lados.size() - 1;
 			#ifndef NDEBUG
 				assert((hasCurrEdge() && currEdge().has(v))
 					&& (currEdge().other(v) == u)
-					&& (abs(currEdge().getItem() - distance) < COTA_ERROR));
+					&& (abs(currEdge().getItem() - l.getItem()) < COTA_ERROR));
 				if(isDirected())
 					assert(currEdge().first() == v && currEdge().second() == u);
 			#endif
 		}
 
+	/*!
+	\brief Borra un vertice del grafo, señalado por el cursor
+	\note funcion inline
+	\pre existeVertice(u)
+	\post hasCurrEdge()
+	*/
 		inline void removeVertex()
 		{
 			#ifndef NDEBUG
@@ -359,10 +398,10 @@ class Grafo
 			#ifndef NDEBUG
 				assert(hasCurrEdge());
 			#endif
-			_Matrix[currEdge().first().getLabel()-1][currEdge().second().getLabel()-1] = 0;
-			_Matrix[currEdge().second().getLabel()-1][currEdge().first().getLabel()-1] = 0;
+			_Matrix[currEdge().first().getLabel()-1][currEdge().second().getLabel()-1] = std::numeric_limits<double>::infinity();
+			_Matrix[currEdge().second().getLabel()-1][currEdge().first().getLabel()-1] = std::numeric_limits<double>::infinity();
 			_lados.erase(_lados.begin() + _curEdge);
-			ajustarAdyacencias();
+			// ajustarAdyacencias();
 		}
 
 	/*!
@@ -561,6 +600,12 @@ class Grafo
 					assert(currEdge().has(currVertex()));
 			#endif
 		}
+
+		/*! 
+			\name Algoritmos de Arbol Abarcador
+		*/
+
+		ed::Grafo kruskal();
 
 }; //class Grafo
 } //namespace
