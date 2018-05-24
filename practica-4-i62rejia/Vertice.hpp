@@ -34,7 +34,7 @@ class Vertice
 	/*!
 	\name Constructor de la clase Vertice
 	*/
-		Vertice();
+		//Vertice();
 
 	/*!
 	\name Observadores de la clase Vertice

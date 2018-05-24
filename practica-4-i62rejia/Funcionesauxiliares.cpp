@@ -7,7 +7,7 @@
 */
 
 #include "Funcionesauxiliares.hpp"
-
+#include "Vertice.hpp"
 
 	void ed::cargarGrafoDesdeFichero(std::string const & nombreFichero, ed::Grafo & grafo)
 	{

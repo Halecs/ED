@@ -19,6 +19,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <vector>
+#include <cmath>
+#include <algorithm>
 using std::istream;
 using std::ostream;
 
@@ -41,7 +43,7 @@ class Grafo
 	*/
 		std::vector<ed::Vertice> _vertices; //!< Vector de vertices
 		std::vector<ed::Lado> _lados;		//!< Vector de lados
-		std::vector< std::vector<int> > _Matrix;	//!< Matrix de adyacencia
+		std::vector< std::vector<double> > _Matrix;	//!< Matrix de adyacencia
 
 		int _dirigido;  //!< Define si es dirigido o no, 1 -> Dirigido   0 -> No dirigido 
 		int _curVertex; //!< Cursor del vertice
@@ -209,7 +211,7 @@ class Grafo
 	\post	   Ninguna
 	\return    Devuelve true si hay, false si no
 	*/
-		bool existeLado(ed::Lado l)
+		bool existeLado(ed::Lado l) const
 		{
 			#ifndef NDEBUG
 				assert(!isEmpty());
@@ -229,7 +231,7 @@ class Grafo
 	\post	   Ninguna
 	\return    Devuelve un entero que representa el numero de elementos en el vector
 	*/
-		inline int nVertices()
+		inline int nVertices() const
 		{
 			return _vertices.size();
 		}
@@ -245,10 +247,19 @@ class Grafo
 			int i,j;
 			for(i=0; i< nVertices(); i++){
 				for(j=0; j< nVertices(); j++){
-					printf("[%d] [%d]: ",i,j);
-					std::cout<< _Matrix[i][j]<<std::endl;
-				}	
+					std::cout<< _Matrix[i][j]<<"\t";
+				}
+				std::cout<<std::endl;
 			}	
+		}
+
+		inline double calcularPeso(ed::Vertice u, ed::Vertice v) const
+		{
+			double resultado;
+			double totalx = pow(u.getDataX() - v.getDataX(),2);
+			double totaly = pow(u.getDataY() - v.getDataY(),2);
+			resultado = sqrt(totalx + totaly);
+			return resultado;
 		}
 
 		/*!
@@ -272,12 +283,20 @@ class Grafo
 		void addVertex(ed::Vertice u)
 		{
 			#ifndef NDEBUG
-				assert(!existeVertice(u));
+				if(!isEmpty())
+					assert(!existeVertice(u));
 			#endif
-
 			u.setLabel(_vertices.size() + 1);
 			_vertices.push_back(u);
 			ajustarAdyacencias();
+
+			for (int i = 0; i < nVertices(); ++i)
+			{
+				if(u.getLabel() != _vertices[i].getLabel())
+				{
+					addEdge(u, _vertices[i], calcularPeso(u,_vertices[i]));
+				}
+			}
 
 			_curVertex =(int) _vertices.size() - 1 ;
 			#ifndef NDEBUG
@@ -289,16 +308,16 @@ class Grafo
 		void addEdge(ed::Vertice v, ed::Vertice u, double distance)
 		{
 			#ifndef NDEBUG
-				assert(existeVertice(v));
-				assert(existeVertice(u));				
+				 assert(existeVertice(v));
+				 assert(existeVertice(u));				
 			#endif
 			ed::Lado l;
-
 			l.setItem(distance);
 			l.setFirst(v);
 			l.setSecond(u);
 			_lados.push_back(l);
-			ajustarAdyacencias();
+			_Matrix[l.first().getLabel()-1][l.second().getLabel()-1] = distance;
+			_Matrix[l.second().getLabel()-1][l.first().getLabel()-1] = distance;
 
 			_curEdge = (int) _lados.size() - 1;
 			#ifndef NDEBUG
@@ -315,8 +334,23 @@ class Grafo
 			#ifndef NDEBUG
 				assert(hasCurrVertex());
 			#endif
-				
+			int ref = _curVertex;
 			_vertices.erase(_vertices.begin() + _curVertex);
+
+			for (; ref <nVertices(); ++ref)
+				_vertices[ref].setLabel(_vertices[ref].getLabel() -1);
+
+			for (int i = 0; i < (int)_lados.size(); ++i)
+			{
+				if(_lados[i].first().getLabel() == _curVertex +1)
+				{
+					int et = _lados[i].first().getLabel();
+					_lados[i].first().setLabel(et);
+				}
+
+				if(_lados[i].second().getLabel() == _curVertex +1)
+					_lados[i].second().setLabel(_lados[i].second().getLabel() -1);
+			}
 			ajustarAdyacencias();
 		}
 
@@ -325,7 +359,8 @@ class Grafo
 			#ifndef NDEBUG
 				assert(hasCurrEdge());
 			#endif
-
+			_Matrix[currEdge().first().getLabel()-1][currEdge().second().getLabel()-1] = 0;
+			_Matrix[currEdge().second().getLabel()-1][currEdge().first().getLabel()-1] = 0;
 			_lados.erase(_lados.begin() + _curEdge);
 			ajustarAdyacencias();
 		}
@@ -460,7 +495,8 @@ class Grafo
 				bool xd;
 				for (int i = 0; i < (int)_lados.size(); ++i)
 				{
-					if(_lados[i].first() == u && _lados[i].second() == v)
+					if((_lados[i].first() == u && _lados[i].second() == v)
+						or (_lados[i].second() == u && _lados[i].first() == v))
 					{
 						_curEdge = i;
 						xd = true;
@@ -469,10 +505,10 @@ class Grafo
 				if(xd == false)
 					_curEdge = -1;
 			#ifndef NDEBUG
-				if(hasCurrEdge())
-					assert(currVertex() == u
+				/*if(hasCurrEdge())
+					assert(currVertex() == v
 						&& currEdge().first() == u
-						&& currEdge().second() == v);
+						&& currEdge().second() == v);*/
 			#endif
 		}
 
@@ -492,7 +528,7 @@ class Grafo
 			#ifndef NDEBUG
 				assert(hasCurrVertex());
 			#endif
-				if (_curVertex < _vertices.size() -1)
+				if (_curVertex < (int)_vertices.size() -1)
 					_curVertex++;
 				else
 					_curVertex = -1;

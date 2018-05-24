@@ -56,7 +56,7 @@ class Lado
 	\post  	   Crea un nuevo objeto de la clase Lado, con un item, un vertice de origen y un vertice de destino
 	\sa	   	   setItem,setPrimero,setSegundo	   
 	*/
-		Lado();
+		//Lado();
 
 	/*!
 	\name Observadores de la clase Lado
@@ -85,7 +85,7 @@ class Lado
 	*/
 		inline bool has(ed::Vertice v) const
 		{
-			if( v == first() || v==second())
+			if( v == first() || v == second())
 				return true;
 			return false;
 		}
@@ -116,10 +116,10 @@ class Lado
 	\post  	   Ninguna
 	\return	   Devuelve el vertice origen o primer vertice del lado
 	*/
-		inline const ed::Vertice first() const
+		inline ed::Vertice first() const
 		{
 			#ifndef NDEBUG
-				assert(other(_origen) == _destino);
+				// assert(other(_origen) == _destino);
 			#endif
 			return _origen;
 		}
@@ -131,10 +131,10 @@ class Lado
 	\post  	   Ninguna
 	\return	   Devuelve el vertice destino o segundo vertice del lado
 	*/
-		inline const ed::Vertice second() const
+		inline ed::Vertice second() const
 		{
 			#ifndef NDEBUG
-				assert(other(_destino) == _origen);
+				// assert(other(_destino) == _origen);
 			#endif
 			return _destino;
 		}
