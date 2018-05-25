@@ -31,20 +31,18 @@
 
 	void ed::grabarGrafoaFichero(std::string const & nombreFichero, ed::Grafo & grafo)
 	{
-		if(grafo.isEmpty())
-		{
-			std::cout<<BIRED<<"El grafo esta vacio, no hay nada que guardar"<<RESET<<std::endl;
-			std::cin.ignore();
-			return;
-		}
 		std::ofstream fich(nombreFichero.c_str());
 		grafo.goToFirstVertex();
+		fich<<"Vertices (x , y)\n";
 		while(grafo.hasCurrVertex())
 		{
 			fich<<grafo.currVertex();
 			grafo.nextVertex();
 		}
+		fich<<"\n"<<"Matriz de adyacencias"<<"\n";
+		fich<<grafo;
 		std::cout<<BIGREEN<<"Fichero guardado con exito"<<RESET<<std::endl;
+		std::cin.ignore();
 		fich.close();
 	}
 
@@ -54,17 +52,19 @@
     	if(grafo.isEmpty())
     	{
        		std::cout<<BIRED<<"El grafo está vacio"<<RESET<<std::endl;
+       		std::cin.ignore();
        		return;
     	}
 		else
 		{
       		std::cout<<BIGREEN<<"El grafo tiene "<<grafo.nVertices()<<" vertices"<<RESET<<std::endl;
+       		std::cin.ignore();
       		return;
       	}
 	}
 
-//Menu de la p3, queda modificarlo
-/*int ed::menu()
+//Menu de la p4, queda modificarlo
+int ed::menu()
 {
 	int opcion;
 	int posicion;
@@ -78,55 +78,39 @@
 	std::cout << "Programa principial | Opciones del menú";
 	std::cout << RESET;
 
-	//////////////////////////////////////////////////////////////////////////////
 	posicion++;
 
 	PLACE(posicion++,10);
-	std::cout <<  "[1] Insertar una medicion";
-
-	//////////////////////////////////////////////////////////////////////////////
+	std::cout << "[1] Comprobar si el grafo esta vacio" << std::endl;
 
 	PLACE(posicion++,10);
-	std::cout << "[2] Borrar la cabeza del monticulo";
-
-	PLACE(posicion++,10);
-	std::cout << "[3] Imprimir monticulo";
-
-	//////////////////////////////////////////////////////////////////////////////
-
-	PLACE(posicion++,10);
-	std::cout << "[4] Borrar todos los elementos del monticulo";
-
-	posicion++;
-	PLACE(posicion++,10);
-	std::cout <<  "[5] Cargar desde fichero";
-
-	PLACE(posicion++,10);
-	std::cout << "[6] Grabar fichero";
-
-	posicion++;
-	PLACE(posicion++,10);
-	std::cout << "[7] Modificar cabeza del monticulo";
-
-	PLACE(posicion++,10);
-	std::cout << "[8] Mostrar cabeza del monticulo";
-
-	PLACE(posicion++,10);
-	std::cout<<"[9] Mostrar numero de elementos en el monticulo";
-
+	std::cout << "[2] Mostrar matriz del grafo por pantalla" << std::endl;
+////////////////////////////////////////////////////////////////////////////////
 	posicion++;
 
 	PLACE(posicion++,10);
-	std::cout<<"[10] Media de precipitaciones por mes";
+	std::cout << "[3] Cargar grafo desde fichero" << std::endl;
 
-	//////////////////////////////////////////////////////////////////////////////
+	PLACE(posicion++,10);
+	std::cout << "[4] Grabar grafo en fichero" << std::endl;
+//////////////////////////////////////////////////////////////////////////////
 	posicion++;
 
+	PLACE(posicion++,10);
+	std::cout << "[5] Aplicar algoritmo de Kruskal al grafo" << std::endl; 
+
+	PLACE(posicion++,10);
+	std::cout << "[6] Aplicar el algoritmo de Prim al grafo" << std::endl;
+
+	PLACE(posicion++,10);
+	std::cout << "[7] Longitud total del arbol abarcador" << std::endl;
+
+	posicion++;
+	posicion++;
 	PLACE(posicion++,10);
 	std::cout << BIRED << "[0] Salir";
 
 
-	//////////////////////////////////////////////////////////////////////////////
 	posicion++;
 
 	PLACE(posicion++,10);
@@ -141,4 +125,4 @@
     std::cin.ignore();
 
 	return opcion;
-}*/
+}

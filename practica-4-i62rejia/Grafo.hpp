@@ -245,6 +245,11 @@ class Grafo
 			}	
 		}
 
+		inline const double getElement(int i, int j) const
+		{
+			return _Matrix[i][j];
+		}
+
 	/*!		
 	\brief     Calcula el peso del lado
 	\note      Función inline
@@ -606,7 +611,24 @@ class Grafo
 		*/
 
 		ed::Grafo kruskal();
+		ed::Grafo prim();
 
+
+		/*!
+			\name Operador de salida de Grafo
+		*/
+
+		friend std::ostream &operator<<(std::ostream &o, const Grafo &g)
+		{
+			int i,j;
+			for(i=0; i< g.nVertices(); i++){
+				for(j=0; j< g.nVertices(); j++){
+					o<<g.getElement(i,j)<<"\t";
+				}
+				o<<"\n";
+			}
+			return o;	
+		}
 }; //class Grafo
 } //namespace
 

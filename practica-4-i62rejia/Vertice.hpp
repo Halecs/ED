@@ -10,6 +10,7 @@
 // Para controlar las precondiciones y postcondiciones mediante asertos
 #include <cassert>
 #include <cstdlib>
+#include <cmath>
 // Para la sobrecarga de los operadores de flujo: << y >>
 using std::istream;
 using std::ostream;
@@ -84,8 +85,8 @@ class Vertice
 			y_ = y;
 
 			#ifndef NDEBUG
-				assert((abs(x_ - x)) < COTA_ERROR);
-				assert((abs(y_ - y)) < COTA_ERROR);
+				assert((std::abs(x_ - x)) < COTA_ERROR);
+				assert((std::abs(y_ - y)) < COTA_ERROR);
 			#endif
 		}
 /*!	

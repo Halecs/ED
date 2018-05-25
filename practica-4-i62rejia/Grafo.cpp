@@ -35,32 +35,74 @@ void ed::Grafo::ajustarAdyacencias()
 ed::Grafo ed::Grafo::kruskal()
 {
 	ed::Grafo coste_minimo;
-	if(isEmpty())
-	{
-		std::cout<<BIRED<<"No hay grafo al que aplicar el algoritmo"<<RESET<<std::endl;
-		std::cin.ignore();
-	}
-	else
-	{
 		std::sort(_lados.begin(),_lados.end(), this->sortLados);
 		std::vector<bool> test;
-		test.resize(nVertices(), false);
+		test.resize(nVertices()+1, false);
 		for (int i = 0; i < nVertices(); ++i)
 			coste_minimo.addVertexN(_vertices[i].getDataX(), _vertices[i].getDataY());
 
 		for (int i = 0; i < (int)_lados.size(); ++i)
 		{
-			int a = _lados[i].first().getLabel() -1;
-			int b = _lados[i].second().getLabel() -1;
-			if((test[a] == false)
-				or (test[b] == false))
+			int a = _lados[i].first().getLabel() ;
+			int b = _lados[i].second().getLabel() ;
+			if((test[a] == false) or (test[b] == false))
 			{
 				coste_minimo.addEdge(_lados[i].first(),_lados[i].second());
-				// a = _lados[i].first().getLabel() -1;
-				// b = _lados[i].second().getLabel() -1;
 				test[a] = true;
 				test[b] = true;
 			}
+		}
+	return coste_minimo;
+}
+
+ed::Grafo ed::Grafo::prim()
+{
+	#ifndef NDEBUG
+		assert(!isEmpty());
+	#endif
+	ed::Grafo coste_minimo;
+	std::vector<int> rev;
+	std::vector<int> torev;
+	for (int i = 0; i < nVertices(); ++i)
+		coste_minimo.addVertexN(_vertices[i].getDataX(), _vertices[i].getDataY());
+
+	rev.push_back(0);
+	for (int i = 0; i < nVertices(); ++i)
+		torev.push_back(i+1);
+
+	while(!torev.empty())
+	{
+		int old = -1;
+		int _new = -1;
+		std::vector<int>::iterator erase;
+		double peso = std::numeric_limits<double>::infinity();
+		for (std::vector<int>::iterator it=torev.begin();it!=torev.end(); ++it)
+		{
+			for (std::vector<int>::iterator jt=rev.begin();jt!=rev.end(); ++jt)
+			{
+				if(adjacent(_vertices[*it], _vertices[*jt]))
+				{
+					goToEdge(_vertices[*it], _vertices[*jt]);
+					if(currEdge().getItem() < peso)
+					{
+						peso = currEdge().getItem();
+						old = *jt;
+						erase = it;
+						_new = *it;
+					}
+				}
+			}
+		}
+		if (old != -1 && _new != -1)
+		{
+			coste_minimo.addEdge(_vertices[old],_vertices[_new]);
+			torev.erase(erase);
+			rev.push_back(_new);
+		}
+		else
+		{
+			rev.push_back(torev[0]);
+			torev.erase(torev.begin());
 		}
 	}
 	return coste_minimo;
