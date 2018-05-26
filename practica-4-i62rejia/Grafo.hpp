@@ -159,7 +159,7 @@ class Grafo
 	\post	   Ninguna
 	\return    Devuelve objeto tipo vertice
 	*/
-		inline const ed::Vertice currVertex() const
+		inline const ed::Vertice & currVertex() const
 		{
 			#ifndef NDEBUG
 				assert(hasCurrVertex());
@@ -174,7 +174,7 @@ class Grafo
 	\post	   Ninguna
 	\return    Devuelve objeto tipo lado
 	*/
-		inline const ed::Lado currEdge() const
+		inline const ed::Lado & currEdge() const
 		{
 			/*#ifndef NDEBUG
 				assert(hasCurrEdge());
