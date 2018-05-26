@@ -134,27 +134,3 @@ int ed::menu()
 
 	return opcion;
 }
-
-/*int ed::find(ed::subset subsets[], int i)
-{
-	if(subsets[i].getPadre() != i)
-		subsets[i].setPadre(find(subsets,subsets[i].getPadre()));
-
-	return subsets[i].getPadre();
-}
-
-void ed::Union(ed::subset subsets[], int x, int y)
-{
-	int xroot = find(subsets, x);
-	int yroot = find(subsets, y);
-	if(subsets[xroot].getPeso() < subsets[yroot].getPeso())
-		subsets[xroot].setPadre(xroot);
-	else if(subsets[xroot].getPeso() > subsets[yroot].getPeso())
-			subsets[yroot].setPadre(yroot);
-
-	else
-	{
-		subsets[yroot].setPadre(xroot);
-		subsets[xroot].setPeso(subsets[xroot].getPeso()+1);
-	}
-}*/

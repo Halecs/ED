@@ -17,21 +17,7 @@
 	\brief   Programa principal de la práctica 4
 	\return  int
 */
-/*int main(int argc, char const *argv[])
-{
-	ed::Grafo g;
-	cargarGrafoDesdeFichero("vertices.txt", g);
-	g.printMatriz();
-	grabarGrafoaFichero("salida.txt", g);
 
-	ed::Grafo h = g.kruskal();
-	h.printMatriz();
-	std::cout<<std::endl;
-
-	ed::Grafo j = g.prim();
-	j.printMatriz();
-	return 0;
-}*/
 
 int main(){
 
@@ -39,7 +25,7 @@ int main(){
 	ed::Grafo kruskal;
 	ed::Grafo prim;
 	ed::Vertice v;
-	float x, y;
+	double x, y;
 	int origen, destino;
 	std::string nombreFicheroEntrada;
 	std::string nombreFicheroSalida;
