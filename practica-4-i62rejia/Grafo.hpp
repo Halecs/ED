@@ -542,28 +542,50 @@ class Grafo
 	\post	   hasCurrVertex()
 	\return    void
 	*/
-		void findFirstEdge(double p)
+		void findFirstEdge(ed::Vertice v, ed::Vertice u)
 		{
 			#ifndef NDEBUG
 				assert(hasCurrVertex());
 			#endif
-
-			#ifndef NDEBUG
-				if(hasCurrEdge())
-					assert(abs(currEdge().getItem() - p) < COTA_ERROR);
-			#endif
+			bool xd = false;
+			int i = 0;
+			while(!xd)
+			{
+				if(i >=(int) _lados.size())
+				{
+					xd = true;
+					_curEdge = -1;
+				}
+				if(_lados[i].first() == v && _lados[i].second() == u && xd == false)
+				{
+					_curEdge = i;
+					xd = true;
+				}
+				i++;
+			}
 		}
 
-		void findNextEdge(double p)
+		void findNextEdge(ed::Vertice v, ed::Vertice u)
 		{
 			#ifndef NDEBUG
 				assert(hasCurrVertex());
 			#endif
-
-			#ifndef NDEBUG
-				if(hasCurrEdge())
-					assert(abs(currEdge().getItem() - p) < COTA_ERROR);
-			#endif
+			bool xd = false;
+			int i = _curEdge;
+			while(!xd)
+			{
+				if(i >=(int) _lados.size())
+				{
+					xd = true;
+					_curEdge = -1;
+				}
+				if(_lados[i].first() == v && _lados[i].second() == u && xd == false)
+				{
+					_curEdge = i;
+					xd = true;
+				}
+				i++;
+			}
 		}
 
 		void goToVertex(ed::Vertice v)
