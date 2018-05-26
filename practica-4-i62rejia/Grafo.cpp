@@ -106,3 +106,4 @@ ed::Grafo ed::Grafo::prim()
 	}
 	return coste_minimo;
 }
+

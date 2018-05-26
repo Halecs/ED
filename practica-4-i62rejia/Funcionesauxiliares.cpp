@@ -63,6 +63,7 @@
       	}
 	}
 
+
 //Menu de la p4, queda modificarlo
 int ed::menu()
 {
@@ -104,6 +105,13 @@ int ed::menu()
 
 	PLACE(posicion++,10);
 	std::cout << "[7] Longitud total del arbol abarcador" << std::endl;
+
+	posicion++;
+	PLACE(posicion++,10);
+	std::cout << "[8] Agregar un vertice al grafo" << std::endl;
+
+	PLACE(posicion++,10);
+	std::cout << "[9] Agregar un lado al grafo" << std::endl;
 
 	posicion++;
 	posicion++;

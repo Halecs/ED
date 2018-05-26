@@ -260,6 +260,11 @@ class Grafo
 			return _Matrix[i][j];
 		}
 
+		inline const ed::Vertice getVertex(int i) const
+		{
+			return _vertices[i-1];
+		}
+
 	/*!		
 	\brief     Calcula el peso del lado
 	\note      Función inline
@@ -278,7 +283,17 @@ class Grafo
 			return resultado;
 		}
 
+		inline double longitudArbol()
+		{
+			double longitud = 0;
+			for (int i = 0; i < (int)_lados.size(); ++i)
+				longitud += _lados[i].getItem();
+			return longitud;
+		}
+
 		inline static bool sortLados(Lado a, Lado b){return a.getItem() < b.getItem();}
+
+
 		inline void makep()
 		{
 			for (int i = 0; i < nVertices()+1; ++i)
@@ -383,8 +398,8 @@ class Grafo
 		void addEdge(ed::Vertice v, ed::Vertice u)
 		{
 			#ifndef NDEBUG
-				 // assert(existeVertice(v));
-				 // assert(existeVertice(u));				
+				  assert(existeVertice(v));
+				  assert(existeVertice(u));				
 			#endif
 			ed::Lado l;
 			l.setItem(calcularPeso(v, u));
