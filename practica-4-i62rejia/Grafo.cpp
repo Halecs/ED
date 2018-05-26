@@ -35,23 +35,22 @@ void ed::Grafo::ajustarAdyacencias()
 ed::Grafo ed::Grafo::kruskal()
 {
 	ed::Grafo coste_minimo;
-		std::sort(_lados.begin(),_lados.end(), this->sortLados);
-		std::vector<bool> test;
-		test.resize(nVertices()+1, false);
+	std::sort(_lados.begin(),_lados.end(), this->sortLados);
 		for (int i = 0; i < nVertices(); ++i)
 			coste_minimo.addVertexN(_vertices[i].getDataX(), _vertices[i].getDataY());
 
+		coste_minimo.makep();
 		for (int i = 0; i < (int)_lados.size(); ++i)
 		{
-			int a = _lados[i].first().getLabel() ;
-			int b = _lados[i].second().getLabel() ;
-			if((test[a] == false) or (test[b] == false))
+			int x = _lados[i].first().getLabel() ;
+			int y = _lados[i].second().getLabel() ;
+			if(!coste_minimo.same(x,y))
 			{
 				coste_minimo.addEdge(_lados[i].first(),_lados[i].second());
-				test[a] = true;
-				test[b] = true;
+				coste_minimo.Union(x,y);
 			}
 		}
+
 	return coste_minimo;
 }
 

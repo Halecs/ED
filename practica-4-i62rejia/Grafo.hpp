@@ -44,6 +44,7 @@ class Grafo
 		std::vector<ed::Vertice> _vertices; //!< Vector de vertices
 		std::vector<ed::Lado> _lados;		//!< Vector de lados
 		std::vector< std::vector<double> > _Matrix;	//!< Matrix de adyacencia
+		int padre[100];
 
 		int _dirigido;  //!< Define si es dirigido o no, 1 -> Dirigido   0 -> No dirigido 
 		int _curVertex; //!< Cursor del vertice
@@ -216,6 +217,15 @@ class Grafo
 			return false;
 		}
 
+		ed::Lado findLado(ed::Vertice v, ed::Vertice u) const
+		{
+			for (int i = 0; i <(int) _lados.size(); ++i)
+			{
+				if(_lados[i].first() == v && _lados[i].second() == u)
+					return _lados[i];
+			}
+		}
+
 	/*!		
 	\brief     Comprueba el numero de vertices del Grafo
 	\note      Función inline
@@ -269,7 +279,34 @@ class Grafo
 		}
 
 		inline static bool sortLados(Lado a, Lado b){return a.getItem() < b.getItem();}
+		inline void makep()
+		{
+			for (int i = 0; i < nVertices()+1; ++i)
+			{
+				padre[i] = i;
+			}
+		}
+		inline int find(int x)
+		{
+			if(x == padre[x])
+				return x;
+			else
+				return find(padre[x]);
+		}
 
+		inline void Union(int x, int y)
+		{
+			int a = find(x);
+			int b = find(y);
+			padre[a] = b;
+		}
+
+		inline bool same(int x, int y)
+		{
+				if(find(x) == find(y))
+					return true;
+				return false;
+		}
 		/*!
 			\name Modificadores de la clase Grafo
 		*/
