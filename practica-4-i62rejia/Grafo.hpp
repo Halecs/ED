@@ -217,7 +217,7 @@ class Grafo
 			return false;
 		}
 
-		ed::Lado findLado(ed::Vertice v, ed::Vertice u) const
+		const ed::Lado & findLado(ed::Vertice v, ed::Vertice u) const
 		{
 			for (int i = 0; i <(int) _lados.size(); ++i)
 			{
@@ -255,9 +255,28 @@ class Grafo
 			}	
 		}
 
-		inline const double getElement(int i, int j) const
+	/*!		
+	\brief     Obtiene el elemento i j de la matriz de adyacencia
+	\note      Función inline
+	\pre   	   ninguna
+	\post	   Ninguna
+	\return    const double
+	*/
+		inline const double & getElement(int i, int j) const
 		{
 			return _Matrix[i][j];
+		}
+
+	/*!		
+	\brief     Obtiene el vertice con etiqueta i del vector de vertices
+	\note      Función inline
+	\pre   	   ninguna
+	\post	   Ninguna
+	\return    const vertice
+	*/
+		inline const ed::Vertice & getVertex(int i) const
+		{
+			return _vertices[i-1];
 		}
 
 	/*!		
@@ -278,7 +297,17 @@ class Grafo
 			return resultado;
 		}
 
+		inline double longitudArbol() const
+		{
+			double longitud = 0;
+			for (int i = 0; i < (int)_lados.size(); ++i)
+				longitud += _lados[i].getItem();
+			return longitud;
+		}
+
 		inline static bool sortLados(Lado a, Lado b){return a.getItem() < b.getItem();}
+
+
 		inline void makep()
 		{
 			for (int i = 0; i < nVertices()+1; ++i)
@@ -307,6 +336,7 @@ class Grafo
 					return true;
 				return false;
 		}
+
 		/*!
 			\name Modificadores de la clase Grafo
 		*/
@@ -350,16 +380,17 @@ class Grafo
 			#endif
 		}
 
-		void addVertexN(float x, float y)
+	/*!
+	\brief Añade un vertice al grafo a partir del data
+	\note Aumentamos el numero de vertices en 1.
+	\param x: coordenada x del vertice
+	\param y: coordenada y del vertice
+	\pre !existeVertice(u)
+	\post hasCurrVertex()
+	*/
+		void addVertexN(double x, double y)
 		{
 			ed::Vertice a;
-			/*if(!isEmpty() && existeVertice(a))
-			{
-				std::cout<<BIRED<<"Ya existe el vertice a introducir, error"<<RESET<<std::endl;
-				std::cin.ignore();
-				return;
-			}*/
-
 			a.setData(x, y);
 			a.setLabel(_vertices.size() + 1);
 			_vertices.push_back(a);
@@ -383,8 +414,8 @@ class Grafo
 		void addEdge(ed::Vertice v, ed::Vertice u)
 		{
 			#ifndef NDEBUG
-				 // assert(existeVertice(v));
-				 // assert(existeVertice(u));				
+				  assert(existeVertice(v));
+				  assert(existeVertice(u));				
 			#endif
 			ed::Lado l;
 			l.setItem(calcularPeso(v, u));
@@ -407,8 +438,8 @@ class Grafo
 	/*!
 	\brief Borra un vertice del grafo, señalado por el cursor
 	\note funcion inline
-	\pre existeVertice(u)
-	\post hasCurrEdge()
+	\pre hasCurrVertex()
+	\post Ninguna
 	*/
 		inline void removeVertex()
 		{
@@ -435,6 +466,12 @@ class Grafo
 			ajustarAdyacencias();
 		}
 
+	/*!
+	\brief Borra un lado del grafo, señalado por el cursor
+	\note funcion inline
+	\pre hasCurrEdge()
+	\post Ninguna
+	*/
 		inline void removeEdge()
 		{
 			#ifndef NDEBUG
@@ -459,7 +496,7 @@ class Grafo
 	\post	   hasCurrVertex()
 	\return    void
 	*/
-		void findFirstVertex(float x, float y)
+		void findFirstVertex(double x, double y)
 		{
 			bool xd = false;
 			int i = 0;
@@ -493,7 +530,7 @@ class Grafo
 	\post	   hasCurrVertex()
 	\return    void
 	*/
-		void findNextVertex(float x, float y)
+		void findNextVertex(double x, double y)
 		{
 			bool xd = false;
 			int i = _curVertex;
@@ -522,33 +559,65 @@ class Grafo
 	/*!		
 	\brief     Comprueba si existe el lado y encuentra el primero
 	\note      Función inline
-	\param     p: peso del lado
+	\param     v: vertice 1
+	\param     u: vertice 2
 	\pre   	   Ninguna
 	\post	   hasCurrVertex()
 	\return    void
 	*/
-		void findFirstEdge(double p)
+		void findFirstEdge(ed::Vertice v, ed::Vertice u)
 		{
 			#ifndef NDEBUG
 				assert(hasCurrVertex());
 			#endif
-
-			#ifndef NDEBUG
-				if(hasCurrEdge())
-					assert(abs(currEdge().getItem() - p) < COTA_ERROR);
-			#endif
+			bool xd = false;
+			int i = 0;
+			while(!xd)
+			{
+				if(i >=(int) _lados.size())
+				{
+					xd = true;
+					_curEdge = -1;
+				}
+				if(_lados[i].first() == v && _lados[i].second() == u && xd == false)
+				{
+					_curEdge = i;
+					xd = true;
+				}
+				i++;
+			}
 		}
 
-		void findNextEdge(double p)
+	/*!		
+	\brief     Comprueba si existe el lado y encuentra el primero a partir del cursor
+	\note      Función inline
+	\param     v: vertice 1
+	\param     u: vertice 2
+	\pre   	   Ninguna
+	\post	   hasCurrVertex()
+	\return    void
+	*/
+		void findNextEdge(ed::Vertice v, ed::Vertice u)
 		{
 			#ifndef NDEBUG
 				assert(hasCurrVertex());
 			#endif
-
-			#ifndef NDEBUG
-				if(hasCurrEdge())
-					assert(abs(currEdge().getItem() - p) < COTA_ERROR);
-			#endif
+			bool xd = false;
+			int i = _curEdge;
+			while(!xd)
+			{
+				if(i >=(int) _lados.size())
+				{
+					xd = true;
+					_curEdge = -1;
+				}
+				if(_lados[i].first() == v && _lados[i].second() == u && xd == false)
+				{
+					_curEdge = i;
+					xd = true;
+				}
+				i++;
+			}
 		}
 
 		void goToVertex(ed::Vertice v)
@@ -585,12 +654,6 @@ class Grafo
 				}
 				if(xd == false)
 					_curEdge = -1;
-			#ifndef NDEBUG
-				/*if(hasCurrEdge())
-					assert(currVertex() == v
-						&& currEdge().first() == u
-						&& currEdge().second() == v);*/
-			#endif
 		}
 
 		inline void goToFirstVertex()
@@ -604,6 +667,7 @@ class Grafo
 					assert(!hasCurrVertex());
 			#endif
 		}
+
 		inline void nextVertex()
 		{
 			#ifndef NDEBUG
@@ -654,7 +718,14 @@ class Grafo
 		/*!
 			\name Operador de salida de Grafo
 		*/
-
+	/*!		
+	\brief  Operador de extracción  
+	\param  o: flujo de salida
+	\param  g: objeto de tipo Grafo  
+	\pre    Ninguna
+	\post   Se escriben los valores de los atributos del Grafo en flujo de salida
+	\return Devuelve el stream de salida
+	*/
 		friend std::ostream &operator<<(std::ostream &o, const Grafo &g)
 		{
 			int i,j;

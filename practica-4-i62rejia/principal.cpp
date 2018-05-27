@@ -17,27 +17,16 @@
 	\brief   Programa principal de la práctica 4
 	\return  int
 */
-/*int main(int argc, char const *argv[])
-{
-	ed::Grafo g;
-	cargarGrafoDesdeFichero("vertices.txt", g);
-	g.printMatriz();
-	grabarGrafoaFichero("salida.txt", g);
 
-	ed::Grafo h = g.kruskal();
-	h.printMatriz();
-	std::cout<<std::endl;
-
-	ed::Grafo j = g.prim();
-	j.printMatriz();
-	return 0;
-}*/
 
 int main(){
 
 	ed::Grafo g;
 	ed::Grafo kruskal;
 	ed::Grafo prim;
+	ed::Vertice v;
+	double x, y;
+	int origen, destino;
 	std::string nombreFicheroEntrada;
 	std::string nombreFicheroSalida;
 
@@ -116,7 +105,7 @@ int main(){
 					std::cout << "[6] Aplicar el algoritmo de Prim al grafo" << std::endl;
 					if(g.isEmpty())
 					{
-						std::cout<<BIRED<<"El grafo esta vacio, no se puede aplicar"<<std::endl;
+						std::cout<<BIRED<<"El grafo esta vacio, no se puede aplicar"<<RESET<<std::endl;
 						break;
 					}
 					prim = g.prim();
@@ -127,15 +116,73 @@ int main(){
 
 			case 7: 
 					std::cout << "[7] Longitud total del arbol abarcador" << std::endl;
-					if(kruskal.isEmpty() && prim.isEmpty())
+					if (kruskal.isEmpty())
 					{
-						std::cout<<BIRED<<"No se ha aplicado ninguno de los dos algoritmos"<<std::endl;
-						break;
+						if(prim.isEmpty())
+						{
+							std::cout<<BIRED<<"No se ha aplicado ninguno de los dos algoritmos"<<RESET<<std::endl;
+							break;
+						}
+						else
+						{
+							std::cout<<BIBLUE<<"La longitud del arbol abarcador es: "<<prim.longitudArbol()<<RESET<<std::endl;
+							break;
+						}
 					}
+					else
+						std::cout<<BIBLUE<<"La longitud del arbol abarcador es: "<<kruskal.longitudArbol()<<RESET<<std::endl;					
 					break;
 
+			case 8:
+					std::cout << "[8] Agregar un vertice al grafo" << std::endl;
+					std::cout<<BIBLUE<< "Introduzca x del vertice"<<RESET<<std::endl;
+					std::cin>>x;
+					std::cout<<BIBLUE<< "Introduzca y del vertice"<<RESET<<std::endl;
+					std::cin>>y;
+					v.setData(x, y);
+					g.findFirstVertex(x,y);
+					if(g.hasCurrVertex())
+					{
+						std::cout<<BIRED<<"El grafo ya contiene ese vertice"<<RESET<<std::endl;
+						std::cin.ignore();
+						break;
+					}
+					g.addVertexN(x, y);
+					break;
 
-
+			case 9:
+					std::cout << "[9] Agregar lado al grafo" << std::endl;
+					if(g.isEmpty())
+					{
+						std::cout<<BIRED<<"El grafo no tiene vertices"<<RESET<<std::endl;
+						std::cin.ignore();
+						break;
+					}
+					std::cout<<BIBLUE<< "Introduzca vertice de origen entre los disponibles: (1 ~ "<<g.nVertices()<<RESET<<std::endl;
+					std::cin>>origen;
+					if(not((origen <= g.nVertices()) && (origen > 0.0)))
+					{
+						std::cout<<BIRED<<"Vertice 1 incorrecto"<<RESET<<std::endl;
+						std::cin.ignore();
+						break;
+					}
+					std::cout<<BIBLUE<< "Introduzca vertice de destino entre los disponibles: (1 ~ "<<g.nVertices()<<RESET<<std::endl;
+					std::cin>>destino;
+					if(not((destino <= g.nVertices() && destino > 0)) && (origen == destino))
+					{
+						std::cout<<BIRED<<"Vertice 2 incorrecto"<<RESET<<std::endl;
+						std::cin.ignore();
+						break;
+					}
+					g.goToEdge(g.getVertex(origen),g.getVertex(destino));
+					if(g.hasCurrEdge())
+					{
+						std::cout<<BIRED<<"El grafo ya contiene ese lado"<<RESET<<std::endl;
+						std::cin.ignore();
+						break;
+					}					
+					g.addEdge(g.getVertex(origen),g.getVertex(destino));
+					break;
 			//////////////////////////////////////////////////////////////////////////////
 			default:
 				std::cout << BIRED;

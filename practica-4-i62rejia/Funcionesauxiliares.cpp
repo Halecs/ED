@@ -63,6 +63,7 @@
       	}
 	}
 
+
 //Menu de la p4, queda modificarlo
 int ed::menu()
 {
@@ -106,6 +107,13 @@ int ed::menu()
 	std::cout << "[7] Longitud total del arbol abarcador" << std::endl;
 
 	posicion++;
+	PLACE(posicion++,10);
+	std::cout << "[8] Agregar un vertice al grafo" << std::endl;
+
+	PLACE(posicion++,10);
+	std::cout << "[9] Agregar un lado al grafo" << std::endl;
+
+	posicion++;
 	posicion++;
 	PLACE(posicion++,10);
 	std::cout << BIRED << "[0] Salir";
@@ -126,27 +134,3 @@ int ed::menu()
 
 	return opcion;
 }
-
-/*int ed::find(ed::subset subsets[], int i)
-{
-	if(subsets[i].getPadre() != i)
-		subsets[i].setPadre(find(subsets,subsets[i].getPadre()));
-
-	return subsets[i].getPadre();
-}
-
-void ed::Union(ed::subset subsets[], int x, int y)
-{
-	int xroot = find(subsets, x);
-	int yroot = find(subsets, y);
-	if(subsets[xroot].getPeso() < subsets[yroot].getPeso())
-		subsets[xroot].setPadre(xroot);
-	else if(subsets[xroot].getPeso() > subsets[yroot].getPeso())
-			subsets[yroot].setPadre(yroot);
-
-	else
-	{
-		subsets[yroot].setPadre(xroot);
-		subsets[xroot].setPeso(subsets[xroot].getPeso()+1);
-	}
-}*/

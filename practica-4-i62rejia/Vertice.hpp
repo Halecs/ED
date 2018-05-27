@@ -27,8 +27,8 @@ class Vertice
 	/*!		
 	\name Atributos o métodos privados
 	*/
-		float x_;	//!< Coordenada x del vertice
-		float y_;	//!< Coordenada y del vertice
+		double x_;	//!< Coordenada x del vertice
+		double y_;	//!< Coordenada y del vertice
 		int label_; //!< Nombre del vertice (Unico)
 
 	public:
@@ -45,18 +45,18 @@ class Vertice
 	\note   Función inline
 	\pre    Ninguna
 	\post   Ninguna
-	\return const float, el valor de la coordenada
+	\return const double, el valor de la coordenada
 */
-		inline const float & getDataX()const { return x_;};
+		inline const double & getDataX()const { return x_;};
 
 /*!	
 	\brief  Método público que devuelve la coordenada y del vertice
 	\note   Función inline
 	\pre    Ninguna
 	\post   Ninguna
-	\return const float, el valor de la coordenada
+	\return const double, el valor de la coordenada
 */
-		inline const float & getDataY()const {return y_;};
+		inline const double & getDataY()const {return y_;};
 
 /*!	
 	\brief  Método público que devuelve el nombre del vertice
@@ -79,7 +79,7 @@ class Vertice
 	\post   El campo informativo del Vertice es igual al parámetro pasado como argumento
 	\return void
 */
-		inline void setData(float x, float y)
+		inline void setData(double x, double y)
 		{
 			x_ = x;
 			y_ = y;
