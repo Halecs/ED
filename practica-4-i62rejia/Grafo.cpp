@@ -13,7 +13,7 @@ void ed::Grafo::ajustarAdyacencias()
 	int i,j;
 	_Matrix.resize(nVertices());
 	for (i = 0; i < nVertices(); ++i)
-		_Matrix[i].resize(nVertices());
+		_Matrix[i].resize(nVertices(), std::numeric_limits<double>::infinity());
 
 	for (i = 0; i < nVertices(); ++i)
 	{
