@@ -113,6 +113,12 @@ int ed::menu()
 	PLACE(posicion++,10);
 	std::cout << "[9] Agregar un lado al grafo" << std::endl;
 
+	PLACE(posicion++,10);
+	std::cout << "[10] Borrar vertice del grafo" << std::endl;
+
+	PLACE(posicion++,10);
+	std::cout << "[11] Borrar lado del grafo" << std::endl;
+
 	posicion++;
 	posicion++;
 	PLACE(posicion++,10);

@@ -26,7 +26,7 @@ int main(){
 	ed::Grafo prim;
 	ed::Vertice v;
 	double x, y;
-	int origen, destino;
+	int origen, destino, indice;
 	std::string nombreFicheroEntrada;
 	std::string nombreFicheroSalida;
 
@@ -158,7 +158,7 @@ int main(){
 						std::cin.ignore();
 						break;
 					}
-					std::cout<<BIBLUE<< "Introduzca vertice de origen entre los disponibles: (1 ~ "<<g.nVertices()<<RESET<<std::endl;
+					std::cout<<BIBLUE<< "Introduzca vertice de origen entre los disponibles: (1 ~ "<<g.nVertices()<<")"<<RESET<<std::endl;
 					std::cin>>origen;
 					if(not((origen <= g.nVertices()) && (origen > 0.0)))
 					{
@@ -166,9 +166,9 @@ int main(){
 						std::cin.ignore();
 						break;
 					}
-					std::cout<<BIBLUE<< "Introduzca vertice de destino entre los disponibles: (1 ~ "<<g.nVertices()<<RESET<<std::endl;
+					std::cout<<BIBLUE<< "Introduzca vertice de destino entre los disponibles: (1 ~ "<<g.nVertices()<<")"<<RESET<<std::endl;
 					std::cin>>destino;
-					if(not((destino <= g.nVertices() && destino > 0)) && (origen == destino))
+					if(not((destino <= g.nVertices() && destino > 0)) or (origen == destino))
 					{
 						std::cout<<BIRED<<"Vertice 2 incorrecto"<<RESET<<std::endl;
 						std::cin.ignore();
@@ -183,6 +183,71 @@ int main(){
 					}					
 					g.addEdge(g.getVertex(origen),g.getVertex(destino));
 					break;
+
+			case 10:
+					std::cout << "[10] Borrar vertice del grafo" << std::endl;
+					if(g.isEmpty())
+					{
+						std::cout<<BIRED<<"El grafo no tiene vertices"<<RESET<<std::endl;
+						std::cin.ignore();
+						break;
+					}
+					std::cout<<BIBLUE<< "Introduzca vertice a borrar entre los disponibles: (1 ~ "<<g.nVertices()<<")"<<RESET<<std::endl;
+					std::cin>>indice;
+					if(not((indice <= g.nVertices()) && (indice > 0.0)))
+					{
+						std::cout<<BIRED<<"No existe el vertice a borrar"<<RESET<<std::endl;
+						std::cin.ignore();
+						break;
+					}
+					g.goToVertex(g.getVertex(indice));
+					if(!g.hasCurrVertex())
+					{
+						std::cout<<BIRED<<"El grafo no contiene este vertice"<<RESET<<std::endl;
+						std::cin.ignore();
+						break;
+					}
+					g.removeVertex();
+					std::cout<<BIGREEN<<"Vertice borrado correctamente"<<RESET<<std::endl;
+					std::cin.ignore();
+					break;
+
+			case 11:
+					std::cout << "[11] Borrar lado del grafo" << std::endl;
+					if(g.isEmpty())
+					{
+						std::cout<<BIRED<<"El grafo no tiene vertices"<<RESET<<std::endl;
+						std::cin.ignore();
+						break;
+					}
+					std::cout<<BIBLUE<< "Introduzca el primer vertice del lado a borrar entre los disponibles: (1 ~ "<<g.nVertices()<<")"<<RESET<<std::endl;
+					std::cin>>origen;
+					if(not((origen <= g.nVertices()) && (origen > 0.0)))
+					{
+						std::cout<<BIRED<<"Vertice 1 incorrecto"<<RESET<<std::endl;
+						std::cin.ignore();
+						break;
+					}
+					std::cout<<BIBLUE<< "Introduzca el segundo vertice del lado a borrar entre los disponibles: (1 ~ "<<g.nVertices()<<")"<<RESET<<std::endl;
+					std::cin>>destino;
+					if(not((destino <= g.nVertices() && destino > 0)) or (origen == destino))
+					{
+						std::cout<<BIRED<<"Vertice 2 incorrecto"<<RESET<<std::endl;
+						std::cin.ignore();
+						break;
+					}
+					g.goToEdge(g.getVertex(origen),g.getVertex(destino));
+					if(!g.hasCurrEdge())
+					{
+						std::cout<<BIRED<<"El grafo no contiene ese lado"<<RESET<<std::endl;
+						std::cin.ignore();
+						break;
+					}	
+					g.removeEdge();
+					std::cout<<BIGREEN<<"Lado borrado correctamente"<<RESET<<std::endl;
+					std::cin.ignore();
+					break;
+
 			//////////////////////////////////////////////////////////////////////////////
 			default:
 				std::cout << BIRED;

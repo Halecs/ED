@@ -12,7 +12,6 @@ void ed::Grafo::ajustarAdyacencias()
 {
 	int i,j;
 	_Matrix.resize(nVertices());
-
 	for (i = 0; i < nVertices(); ++i)
 		_Matrix[i].resize(nVertices());
 

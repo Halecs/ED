@@ -454,13 +454,18 @@ class Grafo
 
 			for (int i = 0; i < (int)_lados.size(); ++i)
 			{
-				if(_lados[i].first().getLabel() == _curVertex +1)
+				if(_lados[i].first().getLabel() == _curVertex +1
+					or _lados[i].second().getLabel() == _curVertex +1)
+					_lados.erase(_lados.begin() + _curVertex);
+			}
+			for (int i = 0; i < (int)_lados.size(); ++i)
+			{
+				if(_lados[i].first().getLabel() >= _curVertex +1)
 				{
-					int et = _lados[i].first().getLabel();
+					int et = _lados[i].first().getLabel() -1;
 					_lados[i].first().setLabel(et);
 				}
-
-				if(_lados[i].second().getLabel() == _curVertex +1)
+				if(_lados[i].second().getLabel() >= _curVertex +1)
 					_lados[i].second().setLabel(_lados[i].second().getLabel() -1);
 			}
 			ajustarAdyacencias();
@@ -500,6 +505,12 @@ class Grafo
 		{
 			bool xd = false;
 			int i = 0;
+			if(isEmpty())
+			{
+				_curVertex = -1;
+				return;
+			}
+
 			while(!xd)
 			{
 				if(i >=(int) _vertices.size())
