@@ -44,7 +44,7 @@ class Grafo
 		std::vector<ed::Vertice> _vertices; //!< Vector de vertices
 		std::vector<ed::Lado> _lados;		//!< Vector de lados
 		std::vector< std::vector<double> > _Matrix;	//!< Matrix de adyacencia
-		int padre[100];
+		std::vector<int> padre; //!< Vector para kruskal
 
 		int _dirigido;  //!< Define si es dirigido o no, 1 -> Dirigido   0 -> No dirigido 
 		int _curVertex; //!< Cursor del vertice
@@ -54,6 +54,7 @@ class Grafo
 	/*!
 		\name Constructor
 	*/
+
 	/*!		
 	\brief     Constructor parametrizado 
 	\note      Función inline
@@ -67,6 +68,8 @@ class Grafo
 			_Matrix.resize(0);
 			_vertices.resize(0);
 			_lados.resize(0);
+			padre.resize(0);
+
 			_dirigido = dirigido;
 			_curVertex = -1;
 			_curEdge = -1;
@@ -203,7 +206,7 @@ class Grafo
 	/*!		
 	\brief     Comprueba si existe el lado
 	\note      Función inline
-	\param     v: lado a buscar
+	\param     l: lado a buscar
 	\pre   	   No puede estar vacio
 	\post	   Ninguna
 	\return    Devuelve true si hay, false si no
@@ -311,9 +314,7 @@ class Grafo
 		inline void makep()
 		{
 			for (int i = 0; i < nVertices()+1; ++i)
-			{
-				padre[i] = i;
-			}
+				padre.push_back(i);
 		}
 		inline int find(int x)
 		{
@@ -460,12 +461,12 @@ class Grafo
 			}
 			for (int i = 0; i < (int)_lados.size(); ++i)
 			{
-				if(_lados[i].first().getLabel() >= _curVertex +1)
+				if(_lados[i].first().getLabel() > _curVertex +1)
 				{
 					int et = _lados[i].first().getLabel() -1;
 					_lados[i].first().setLabel(et);
 				}
-				if(_lados[i].second().getLabel() >= _curVertex +1)
+				if(_lados[i].second().getLabel() > _curVertex +1)
 					_lados[i].second().setLabel(_lados[i].second().getLabel() -1);
 			}
 			ajustarAdyacencias();
@@ -631,7 +632,15 @@ class Grafo
 			}
 		}
 
-		void goToVertex(ed::Vertice v)
+	/*!		
+	\brief     Coloca el cursor en la posicion correspondiente al vertice pasado como parametro
+	\note      Función inline
+	\param     v: vertice a buscar
+	\pre   	   existeVertice(v)
+	\post	   abs(currVertex().getData() - v.getData()) < COTA_ERROR)
+	\return    void
+	*/
+		inline void goToVertex(ed::Vertice v)
 		{
 			#ifndef NDEBUG
 				assert(existeVertice(v));
@@ -647,6 +656,15 @@ class Grafo
 			#endif
 		}
 
+	/*!		
+	\brief     Coloca el cursor en la posicion correspondiente al lado pasado como parametro
+	\note      Función no hecha inline
+	\param     v: vertice del lado a buscar
+	\param     u: vertice del lado a buscar
+	\pre   	   existeVertice(v) && existeVertice(u)
+	\post	   Ninguna
+	\return    void
+	*/
 		void goToEdge(ed::Vertice u, ed::Vertice v)
 		{
 			#ifndef NDEBUG
@@ -667,6 +685,13 @@ class Grafo
 					_curEdge = -1;
 		}
 
+	/*!		
+	\brief     Coloca el cursor en el primer vertice del vector
+	\note      Función inline
+	\pre   	   !isEmpty()
+	\post	   Ninguna
+	\return    void
+	*/
 		inline void goToFirstVertex()
 		{
 			if(!isEmpty())
@@ -679,6 +704,13 @@ class Grafo
 			#endif
 		}
 
+	/*!		
+	\brief     Coloca el cursor en el siguiente vertice
+	\note      Función inline
+	\pre   	   hasCurrVertex()
+	\post	   Ninguna
+	\return    void
+	*/
 		inline void nextVertex()
 		{
 			#ifndef NDEBUG
@@ -690,6 +722,13 @@ class Grafo
 					_curVertex = -1;
 		}
 
+	/*!		
+	\brief     Coloca el cursor en el primer lado
+	\note      Función inline
+	\pre   	   hasCurrVertex()
+	\post	   Ninguna
+	\return    void
+	*/
 		inline void goToFirstEdge()
 		{
 			#ifndef NDEBUG
@@ -703,6 +742,13 @@ class Grafo
 			#endif
 		}
 
+	/*!		
+	\brief     Coloca el cursor en el siguiente lado
+	\note      Función inline
+	\pre   	   hasCurrEdge()
+	\post	   Ninguna
+	\return    void
+	*/
 		inline void nextEdge()
 		{
 			#ifndef NDEBUG
@@ -722,7 +768,22 @@ class Grafo
 			\name Algoritmos de Arbol Abarcador
 		*/
 
+	/*!		
+	\brief     Aplica el algoritmo de Kruskal 
+	\note      Función hecha en el cpp
+	\pre   	   Ninguna
+	\post	   Ninguna
+	\return    Objeto de la clase grafo
+	*/
 		ed::Grafo kruskal();
+
+	/*!		
+	\brief     Aplica el algoritmo de Prim
+	\note      Función hecha en el cpp
+	\pre   	   Ninguna
+	\post	   Ninguna
+	\return    Objeto de la clase grafo
+	*/
 		ed::Grafo prim();
 
 

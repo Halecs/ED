@@ -21,6 +21,11 @@ using std::ostream;
 */
 namespace ed {
 
+/*!
+\class Vertice
+\brief Definición de la clase Vertice
+*/
+
 class Vertice
 {
 	private:
@@ -139,6 +144,23 @@ class Vertice
 				and (getDataY() == v.getDataY()));
 		}
 
+
+	// friend std::ostream &operator<<(std::ostream &o, const Vertice &v);
+
+	// friend std::istream &operator>>(istream &stream, Vertice &v);
+
+};
+
+/*!
+	\brief  Operador de entrada  
+	\param  stream: flujo de entrada
+	\param  v: objeto de tipo Vertice  
+	\pre    El vertice del parametro debe existir
+	\post   Se escriben los valores de los atributos del Vertice en flujo de entrada
+	\return Devuelve el stream de entrada
+*/
+	std::istream &operator>>(std::istream &stream, ed::Vertice &v);
+
 /*!		
 	\brief  Operador de extracción  
 	\param  o: flujo de salida
@@ -147,20 +169,7 @@ class Vertice
 	\post   Se escriben los valores de los atributos del Vertice en flujo de salida
 	\return Devuelve el stream de salida
 */
-	friend std::ostream &operator<<(std::ostream &o, const Vertice &v);
-
-/*!
-	\brief  Operador de entrada  
-	\param  o: flujo de entrada
-	\param  v: objeto de tipo Vertice  
-	\pre    El vertice del parametro debe existir
-	\post   Se escriben los valores de los atributos del Vertice en flujo de entrada
-	\return Devuelve el stream de entrada
-*/
-	friend std::istream &operator>>(istream &stream, Vertice &v);
-
-};
-
+	std::ostream &operator<<(std::ostream &o, const ed::Vertice &v);
 } //end namespace ed
 
 #endif

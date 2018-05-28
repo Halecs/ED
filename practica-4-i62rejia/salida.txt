@@ -11,3 +11,10 @@ Matriz de adyacencias
 3.16228	3	0	2	5	
 4.24264	3.60555	2	0	5.38516	
 8.06226	8	5	5.38516	0	
+
+Matriz resultante de aplicar kruskal
+0	1	inf	inf	inf	
+1	0	3	inf	inf	
+inf	3	0	2	5	
+inf	inf	2	0	inf	
+inf	inf	5	inf	0	

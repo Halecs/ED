@@ -25,7 +25,9 @@ int main(){
 	ed::Grafo kruskal;
 	ed::Grafo prim;
 	ed::Vertice v;
+
 	double x, y;
+	std::string a;
 	int origen, destino, indice;
 	std::string nombreFicheroEntrada;
 	std::string nombreFicheroSalida;
@@ -69,7 +71,7 @@ int main(){
 			//////////////////////////////////////////////////////////////////////////////
 			case 3: 
 					std::cout << "[3] Cargar grafo desde fichero" << std::endl;
-					std::cout<<BIYELLOW<<"Introduzca nombre del fichero de donde quiere cargar el monticulo"<<RESET<<std::endl;
+					std::cout<<BIYELLOW<<"Introduzca nombre del fichero de donde quiere cargar el grafo"<<RESET<<std::endl;
 				  	std::cin>>nombreFicheroEntrada;
 				  	cargarGrafoDesdeFichero(nombreFicheroEntrada, g);
 					break;
@@ -81,9 +83,9 @@ int main(){
 						std::cout<<BIRED<<"El grafo esta vacio"<<std::endl;
 						break;
 					}	
-					std::cout<<BIYELLOW<<"Introduzca nombre del fichero donde quiere guardar el monticulo"<<RESET<<std::endl;
+					std::cout<<BIYELLOW<<"Introduzca nombre del fichero donde quiere guardar el grafo"<<RESET<<std::endl;
 				  	std::cin>>nombreFicheroSalida;			  	
-				  	grabarGrafoaFichero(nombreFicheroSalida, g);
+				  	grabarGrafoaFichero(nombreFicheroSalida, g, kruskal, prim);
 					break;
 
 			//////////////////////////////////////////////////////////////////////////////
@@ -147,7 +149,30 @@ int main(){
 						std::cin.ignore();
 						break;
 					}
-					g.addVertexN(x, y);
+
+					std::cout<<BIYELLOW<<"Desea conectar el vertice con todos los demas?[y/n] --> "<<RESET;
+					std::cin>>a;
+					if(a == "y")
+					{
+						g.addVertex(v);
+						std::cout<<BIGREEN<<"Vertice agregado correctamente"<<RESET<<std::endl;
+					}
+					else
+					{
+						if(a == "n")
+						{
+							g.addVertexN(x,y);
+							std::cout<<BIGREEN<<"Vertice agregado correctamente"<<RESET<<std::endl;
+						}
+						else
+						{
+							std::cout<<BIRED<<"Opcion no valida"<<std::endl;
+							std::cin.ignore();
+							break;
+						}
+					}
+					// g.addVertexN(x, y);
+					std::cout<<BIGREEN<<"Vertice agregado correctamente"<<RESET<<std::endl;
 					break;
 
 			case 9:

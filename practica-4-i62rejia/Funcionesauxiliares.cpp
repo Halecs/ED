@@ -29,7 +29,7 @@
 		fich.close();
 	}
 
-	void ed::grabarGrafoaFichero(std::string const & nombreFichero, ed::Grafo & grafo)
+	void ed::grabarGrafoaFichero(std::string const & nombreFichero, ed::Grafo & grafo, ed::Grafo & kruskal, ed::Grafo & prim)
 	{
 		std::ofstream fich(nombreFichero.c_str());
 		grafo.goToFirstVertex();
@@ -41,6 +41,18 @@
 		}
 		fich<<"\n"<<"Matriz de adyacencias"<<"\n";
 		fich<<grafo;
+
+		if(!kruskal.isEmpty())
+		{
+			fich<<"\n"<<"Matriz resultante de aplicar kruskal"<<"\n";
+			fich<<kruskal;
+		}
+
+		if(!prim.isEmpty())
+		{
+			fich<<"\n"<<"Matriz resultante de aplicar prim"<<"\n";
+			fich<<prim;	
+		}	
 		std::cout<<BIGREEN<<"Fichero guardado con exito"<<RESET<<std::endl;
 		std::cin.ignore();
 		fich.close();
@@ -75,28 +87,31 @@ int ed::menu()
 	std::cout << CLEAR_SCREEN;
 
 	PLACE(1,10);
-	std::cout << BIBLUE;
+	std::cout << BIYELLOW;
 	std::cout << "Programa principial | Opciones del menú";
 	std::cout << RESET;
 
 	posicion++;
-
+	PLACE(posicion++,10);
+	std::cout<<BIBLUE<<"Observadores del grafo"<<RESET<<std::endl;
 	PLACE(posicion++,10);
 	std::cout << "[1] Comprobar si el grafo esta vacio" << std::endl;
 
 	PLACE(posicion++,10);
-	std::cout << "[2] Mostrar matriz del grafo por pantalla" << std::endl;
+	std::cout << "[2] Mostrar matriz del grafo por pantalla\n" << std::endl;
 ////////////////////////////////////////////////////////////////////////////////
 	posicion++;
-
+	PLACE(posicion++,10);
+	std::cout<<BIBLUE<<"Ficheros"<<RESET<<std::endl;
 	PLACE(posicion++,10);
 	std::cout << "[3] Cargar grafo desde fichero" << std::endl;
 
 	PLACE(posicion++,10);
-	std::cout << "[4] Grabar grafo en fichero" << std::endl;
+	std::cout << "[4] Grabar grafo en fichero\n" << std::endl;
 //////////////////////////////////////////////////////////////////////////////
 	posicion++;
-
+	PLACE(posicion++,10);
+	std::cout<<BIBLUE<<"Algoritmos"<<RESET<<std::endl;
 	PLACE(posicion++,10);
 	std::cout << "[5] Aplicar algoritmo de Kruskal al grafo" << std::endl; 
 
@@ -104,9 +119,11 @@ int ed::menu()
 	std::cout << "[6] Aplicar el algoritmo de Prim al grafo" << std::endl;
 
 	PLACE(posicion++,10);
-	std::cout << "[7] Longitud total del arbol abarcador" << std::endl;
+	std::cout << "[7] Longitud total del arbol abarcador\n" << std::endl;
 
 	posicion++;
+	PLACE(posicion++,10);
+	std::cout<<BIBLUE<<"Agregar y/o borrar en el grafo"<<RESET<<std::endl;
 	PLACE(posicion++,10);
 	std::cout << "[8] Agregar un vertice al grafo" << std::endl;
 

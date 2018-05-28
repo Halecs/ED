@@ -15,7 +15,7 @@ namespace ed{
 		return o;
 	}
 
-	std::istream &operator>>(std::istream &stream, Vertice &v)
+	std::istream &operator>>(std::istream &stream, ed::Vertice &v)
 	{
 		std::string cad,cad2;
 		std::getline(stream,cad,' ');

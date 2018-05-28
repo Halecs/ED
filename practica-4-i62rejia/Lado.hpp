@@ -77,7 +77,7 @@ class Lado
 	/*!		
 	\brief     Comprueba si el vertice pasado es el extremo de un lado
 	\note      Función codificada inline
-	\param	   v objeto de la clase Vertice
+	\param	   v: objeto de la clase Vertice
 	\pre   	   Ninguna
 	\post  	   Ninguna
 	\return	   Devuelve true si el vertice v es un extremo del lado, false en caso contrario
@@ -93,6 +93,7 @@ class Lado
 	/*!		
 	\brief	   Comprueba cual es el vertice del otro extremo al del vertice v     
 	\note      Función codificada inline
+	\param     v: vertice a usar
 	\pre   	   Debe tener al vertice v en un extremo del lado, es decir, tiene(v)= true
 	\post  	   Se debe de comprobar que existe el vertice en el otro extremo y devolverlo. 
 	\return	   Devuelve el vertice que se encuentra en el extremo opuesto a v
@@ -146,7 +147,7 @@ class Lado
 	/*!		
 	\brief     Modifica el valor del item del lado
 	\note      Función inline
-	\param	   item, variable tipo double que almacena el nuevo valor del item del lado 
+	\param	   item: variable tipo double que almacena el nuevo valor del item del lado 
 	\pre   	   Ninguna
 	\post  	   Ninguna
 	\return	   void
@@ -162,7 +163,7 @@ class Lado
 	/*!		
 	\brief     Modifica el vertice origen o primer vertice del lado
 	\note      Función inline
-	\param	   v, objeto de la clase Vertice que almacena el nuevo valor del vertice origen del lado 
+	\param	   v: objeto de la clase Vertice que almacena el nuevo valor del vertice origen del lado 
 	\pre   	   Ninguna
 	\post  	   Ninguna
 	\return	   void
@@ -178,7 +179,7 @@ class Lado
 	/*!		
 	\brief     Modifica el vertice destino o segundo vertice del lado
 	\note      Función inline
-	\param	   v, objeto de la clase Vertice que almacena el nuevo valor del vertice destino del lado 
+	\param	   v: objeto de la clase Vertice que almacena el nuevo valor del vertice destino del lado 
 	\pre   	   Ninguna
 	\post  	   Ninguna
 	\return	   void
@@ -195,7 +196,7 @@ class Lado
 	\brief     Operador que compara dos lados
 	\note      Función inline
 	\attention Función sobrecargada
-	\param     v: objeto tipo Lado
+	\param     l: objeto tipo Lado
 	\pre       Ambos vertices deben de tener valores en item y etiqueta
 	\post      Ninguna
 	\return    Devuelve true si el item y la etiqueta son iguales; false, en caso contrario
@@ -211,7 +212,7 @@ class Lado
 	\brief  Operador de asignacion entre objetos de tipo Vertice
 	\note   Función inline
 	\attention Función sobrecargada
-	\param  v: objeto de tipo Vertice
+	\param  l: objeto de tipo Vertice
 	\post   El objeto actual es igual al parámetro
 	\return Devuelve una referencia al objeto actual
 */

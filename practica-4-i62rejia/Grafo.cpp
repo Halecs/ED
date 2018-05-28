@@ -6,7 +6,7 @@
 	\version 1.0
 */
 #include "Grafo.hpp"
-
+//PONER OPCION DE HACER LADOS O NO
 
 void ed::Grafo::ajustarAdyacencias()
 {
