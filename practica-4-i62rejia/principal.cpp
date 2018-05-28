@@ -156,6 +156,8 @@ int main(){
 					{
 						g.addVertex(v);
 						std::cout<<BIGREEN<<"Vertice agregado correctamente"<<RESET<<std::endl;
+						std::cin.ignore();
+						break;
 					}
 					else
 					{
@@ -167,12 +169,11 @@ int main(){
 						else
 						{
 							std::cout<<BIRED<<"Opcion no valida"<<std::endl;
-							std::cin.ignore();
-							break;
 						}
 					}
 					// g.addVertexN(x, y);
-					std::cout<<BIGREEN<<"Vertice agregado correctamente"<<RESET<<std::endl;
+					// std::cout<<BIGREEN<<"Vertice agregado correctamente"<<RESET<<std::endl;
+					std::cin.ignore();
 					break;
 
 			case 9:
