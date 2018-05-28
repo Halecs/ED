@@ -1,3 +1,11 @@
+/*! 	
+	\file    Vertice.cpp
+	\brief   Clase vertice
+	\author  Alejandro Reyes Jimenez
+	\date 	 21-05-2018
+	\version 1.0
+*/
+
 #include <iostream>
 
 // atoi

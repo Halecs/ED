@@ -300,6 +300,13 @@ class Grafo
 			return resultado;
 		}
 
+	/*!		
+	\brief     Calcula la longitud total de los lados que forman el arbol
+	\note      Función inline
+	\pre   	   Ninguna
+	\post	   Ninguna
+	\return    double
+	*/
 		inline double longitudArbol() const
 		{
 			double longitud = 0;
@@ -308,14 +315,39 @@ class Grafo
 			return longitud;
 		}
 
+	/*!		
+	\brief     Calcula la longitud total de los lados que forman el arbol
+	\note      Función inline
+	\param     a: lado primero
+	\param     b: lado segundo
+	\pre   	   Ninguna
+	\post	   Ninguna
+	\return    True si es mayor el segundo, false si el primero.
+	*/
 		inline static bool sortLados(Lado a, Lado b){return a.getItem() < b.getItem();}
 
 
+	/*!		
+	\brief     Rellena el vector con los indices de los vertices
+	\note      Función inline
+	\pre   	   Ninguna
+	\post	   Ninguna
+	\return    double
+	*/
 		inline void makep()
 		{
 			for (int i = 0; i < nVertices()+1; ++i)
 				padre.push_back(i);
 		}
+
+	/*!		
+	\brief     Busca el nodo con el que esta unido x
+	\note      Función inline
+	\param     x: entero, vertice
+	\pre   	   Ninguna
+	\post	   Ninguna
+	\return    int
+	*/
 		inline int find(int x)
 		{
 			if(x == padre[x])
@@ -324,6 +356,15 @@ class Grafo
 				return find(padre[x]);
 		}
 
+	/*!		
+	\brief     Une dos subarboles
+	\note      Función inline
+	\param     x: primer indice del vertice
+	\param     y: segundo indice
+	\pre   	   Ninguna
+	\post	   Ninguna
+	\return    double
+	*/
 		inline void Union(int x, int y)
 		{
 			int a = find(x);
@@ -331,6 +372,13 @@ class Grafo
 			padre[a] = b;
 		}
 
+	/*!		
+	\brief     Comprueba que dos nodos pertenezcan al mismo subarbol
+	\note      Función inline
+	\pre   	   Ninguna
+	\post	   Ninguna
+	\return    double
+	*/
 		inline bool same(int x, int y)
 		{
 				if(find(x) == find(y))
@@ -787,9 +835,6 @@ class Grafo
 		ed::Grafo prim();
 
 
-		/*!
-			\name Operador de salida de Grafo
-		*/
 	/*!		
 	\brief  Operador de extracción  
 	\param  o: flujo de salida

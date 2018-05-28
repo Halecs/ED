@@ -1,5 +1,5 @@
 /*! 	
-	\file    Funcionesauxiliares.hpp
+	\file    Funcionesauxiliares.cpp
 	\brief   Funcionesauxiliares Practica 4
 	\author  Alejandro Reyes Jimenez
 	\date 	 21-05-2018
@@ -76,7 +76,6 @@
 	}
 
 
-//Menu de la p4, queda modificarlo
 int ed::menu()
 {
 	int opcion;

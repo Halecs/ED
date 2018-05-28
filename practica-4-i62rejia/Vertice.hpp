@@ -1,8 +1,14 @@
-
+/*! 	
+	\file    Vertice.hpp
+	\brief   Clase vertice
+	\author  Alejandro Reyes Jimenez
+	\date 	 21-05-2018
+	\version 1.0
+*/
 #ifndef _VERTICEHPP_
 #define _VERTICEHPP_
 
-#define COTA_ERROR   1.0e-6
+#define COTA_ERROR   1.0e-6  //!< Cota de error
 // Entrada y salida 
 #include <iostream>
 #include "macros.hpp"
