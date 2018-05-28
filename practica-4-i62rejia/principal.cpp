@@ -24,6 +24,7 @@ int main(){
 	ed::Grafo g;
 	ed::Grafo kruskal;
 	ed::Grafo prim;
+	ed::Grafo floyd;
 	ed::Vertice v;
 
 	double x, y;
@@ -114,10 +115,20 @@ int main(){
 					std::cout<<BIYELLOW<<"Matriz resultante:"<<RESET<<std::endl;
 					prim.printMatriz();
 					break;
+			case 7:
+					std::cout << "[7] Aplicar el algoritmo de Floyd al grafo" << std::endl;
+					if(g.isEmpty())
+					{
+						std::cout<<BIRED<<"El grafo esta vacio, no se puede aplicar"<<RESET<<std::endl;
+						break;
+					}
+					floyd = g.floyd();
+					std::cout<<BIYELLOW<<"Matriz resultante:"<<RESET<<std::endl;
+					floyd.printMatriz();
+					break;
 
-
-			case 7: 
-					std::cout << "[7] Longitud total del arbol abarcador" << std::endl;
+			case 8: 
+					std::cout << "[8] Longitud total del arbol abarcador" << std::endl;
 					if (kruskal.isEmpty())
 					{
 						if(prim.isEmpty())
@@ -135,8 +146,8 @@ int main(){
 						std::cout<<BIBLUE<<"La longitud del arbol abarcador es: "<<kruskal.longitudArbol()<<RESET<<std::endl;					
 					break;
 
-			case 8:
-					std::cout << "[8] Agregar un vertice al grafo" << std::endl;
+			case 9:
+					std::cout << "[9] Agregar un vertice al grafo" << std::endl;
 					std::cout<<BIBLUE<< "Introduzca x del vertice"<<RESET<<std::endl;
 					std::cin>>x;
 					std::cout<<BIBLUE<< "Introduzca y del vertice"<<RESET<<std::endl;
@@ -176,8 +187,8 @@ int main(){
 					std::cin.ignore();
 					break;
 
-			case 9:
-					std::cout << "[9] Agregar lado al grafo" << std::endl;
+			case 10:
+					std::cout << "[10] Agregar lado al grafo" << std::endl;
 					if(g.isEmpty())
 					{
 						std::cout<<BIRED<<"El grafo no tiene vertices"<<RESET<<std::endl;
@@ -210,8 +221,8 @@ int main(){
 					g.addEdge(g.getVertex(origen),g.getVertex(destino));
 					break;
 
-			case 10:
-					std::cout << "[10] Borrar vertice del grafo" << std::endl;
+			case 11:
+					std::cout << "[11] Borrar vertice del grafo" << std::endl;
 					if(g.isEmpty())
 					{
 						std::cout<<BIRED<<"El grafo no tiene vertices"<<RESET<<std::endl;
@@ -238,8 +249,8 @@ int main(){
 					std::cin.ignore();
 					break;
 
-			case 11:
-					std::cout << "[11] Borrar lado del grafo" << std::endl;
+			case 12:
+					std::cout << "[12] Borrar lado del grafo" << std::endl;
 					if(g.isEmpty())
 					{
 						std::cout<<BIRED<<"El grafo no tiene vertices"<<RESET<<std::endl;

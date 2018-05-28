@@ -834,6 +834,14 @@ class Grafo
 	*/
 		ed::Grafo prim();
 
+	/*!		
+	\brief     Aplica el algoritmo de Floyd
+	\note      Función hecha en el cpp
+	\pre   	   Ninguna
+	\post	   Ninguna
+	\return    Objeto de la clase grafo
+	*/
+		ed::Grafo floyd();
 
 	/*!		
 	\brief  Operador de extracción  

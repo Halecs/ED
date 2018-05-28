@@ -118,22 +118,25 @@ int ed::menu()
 	std::cout << "[6] Aplicar el algoritmo de Prim al grafo" << std::endl;
 
 	PLACE(posicion++,10);
-	std::cout << "[7] Longitud total del arbol abarcador\n" << std::endl;
+	std::cout << "[7] Aplicar el algoritmo de Floyd al grafo" << std::endl;
+
+	PLACE(posicion++,10);
+	std::cout << "[8] Longitud total del arbol abarcador\n" << std::endl;
 
 	posicion++;
 	PLACE(posicion++,10);
 	std::cout<<BIBLUE<<"Agregar y/o borrar en el grafo"<<RESET<<std::endl;
 	PLACE(posicion++,10);
-	std::cout << "[8] Agregar un vertice al grafo" << std::endl;
+	std::cout << "[9] Agregar un vertice al grafo" << std::endl;
 
 	PLACE(posicion++,10);
-	std::cout << "[9] Agregar un lado al grafo" << std::endl;
+	std::cout << "[10] Agregar un lado al grafo" << std::endl;
 
 	PLACE(posicion++,10);
-	std::cout << "[10] Borrar vertice del grafo" << std::endl;
+	std::cout << "[11] Borrar vertice del grafo" << std::endl;
 
 	PLACE(posicion++,10);
-	std::cout << "[11] Borrar lado del grafo" << std::endl;
+	std::cout << "[12] Borrar lado del grafo" << std::endl;
 
 	posicion++;
 	posicion++;
