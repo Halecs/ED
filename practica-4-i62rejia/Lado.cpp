@@ -6,5 +6,5 @@
 	\version 1.0
 */
 #include <cassert>
-#include "lado.hpp"
+#include "Lado.hpp"
 #include <iostream>
