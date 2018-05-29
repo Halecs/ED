@@ -534,7 +534,6 @@ class Grafo
 			_Matrix[currEdge().first().getLabel()-1][currEdge().second().getLabel()-1] = std::numeric_limits<double>::infinity();
 			_Matrix[currEdge().second().getLabel()-1][currEdge().first().getLabel()-1] = std::numeric_limits<double>::infinity();
 			_lados.erase(_lados.begin() + _curEdge);
-			// ajustarAdyacencias();
 		}
 
 	/*!
