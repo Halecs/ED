@@ -509,20 +509,19 @@ class Grafo
 				if(_lados[i].first().getLabel() == _curVertex +1
 					or _lados[i].second().getLabel() == _curVertex +1)
 					_lados.erase(_lados.begin() + _curVertex);
-			}
-
+			}	
 			//Reestructuramos las etiquetas del vertice lados
 			for (int i = 0; i < (int)_lados.size(); ++i)
 			{
-				if(_lados[i].first().getLabel() > _curVertex +1)
+				if(_lados[i].first().getLabel() >= _curVertex +1)
 				{
 					int et = _lados[i].first().getLabel() -1;
 					_lados[i].first().setLabel(et);
 				}
-				if(_lados[i].second().getLabel() > _curVertex +1)
+				if(_lados[i].second().getLabel() >= _curVertex +1)
 					_lados[i].second().setLabel(_lados[i].second().getLabel() -1);
 			}
-			ajustarAdyacencias();
+			_curVertex = -1;
 		}
 
 	/*!
