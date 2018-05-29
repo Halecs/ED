@@ -538,6 +538,22 @@ class Grafo
 		}
 
 	/*!
+	\brief Borra todo lo que hay
+	\note funcion inline
+	\pre Ninguna
+	\post Ninguna
+	*/
+		inline void clearAll()
+		{
+			_Matrix.clear();
+			_vertices.clear();
+			_lados.clear();
+			padre.clear();
+			_curVertex= -1;
+			_curEdge = -1;
+		}
+
+	/*!
 		\name Modificadores del cursor
 	*/
 

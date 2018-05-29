@@ -12,6 +12,7 @@
 	void ed::cargarGrafoDesdeFichero(std::string const & nombreFichero, ed::Grafo & grafo)
 	{
 		ed::Vertice aux;
+		grafo.clearAll();
 		std::ifstream fich( nombreFichero.c_str() );
 		if(!fich)
 		{

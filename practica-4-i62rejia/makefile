@@ -1,12 +1,12 @@
 NAME=principal
 
 #
-OBJECTS = $(NAME).o FuncionesAuxiliares.o Grafo.o Vertice.o Lado.o
+OBJECTS = $(NAME).o Funcionesauxiliares.o Grafo.o Vertice.o Lado.o
 
 #
 CPPFLAGS = -c -g -Wall -ansi -O2
 
-INCLUDES = FuncionesAuxiliares.hpp Grafo.hpp Vertice.hpp Lado.hpp macros.hpp
+INCLUDES = Funcionesauxiliares.hpp Grafo.hpp Vertice.hpp Lado.hpp macros.hpp
 
 # Macros predefinidas
 #
@@ -31,7 +31,7 @@ $(NAME).o: $(NAME).cpp $(INCLUDES)
 			@g++ $(CPPFLAGS) $<
 
 #
-FuncionesAuxiliares.o: FuncionesAuxiliares.cpp $(INCLUDES)
+Funcionesauxiliares.o: Funcionesauxiliares.cpp $(INCLUDES)
 			@echo "Compilando " $<
 			@g++ $(CPPFLAGS) $<
 
