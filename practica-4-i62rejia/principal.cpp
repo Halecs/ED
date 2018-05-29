@@ -217,7 +217,7 @@ int main(){
 						std::cout<<BIRED<<"El grafo ya contiene ese lado"<<RESET<<std::endl;
 						std::cin.ignore();
 						break;
-					}					
+					}
 					g.addEdge(g.getVertex(origen),g.getVertex(destino));
 					std::cout<<BIGREEN<<"Lado agregado correctamente"<<RESET<<std::endl;
 					std::cin.ignore();
@@ -281,7 +281,7 @@ int main(){
 						std::cout<<BIRED<<"El grafo no contiene ese lado"<<RESET<<std::endl;
 						std::cin.ignore();
 						break;
-					}	
+					}
 					g.removeEdge();
 					std::cout<<BIGREEN<<"Lado borrado correctamente"<<RESET<<std::endl;
 					std::cin.ignore();

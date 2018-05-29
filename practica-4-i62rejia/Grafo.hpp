@@ -739,7 +739,7 @@ class Grafo
 				assert(existeVertice(u));
 				assert(existeVertice(v));				
 			#endif
-				bool xd;
+				bool xd = false;
 				for (int i = 0; i < (int)_lados.size(); ++i)
 				{
 					if((_lados[i].first() == u && _lados[i].second() == v)
