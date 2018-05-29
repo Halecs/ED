@@ -414,6 +414,7 @@ class Grafo
 			_vertices.push_back(u);
 			ajustarAdyacencias();
 
+			//Creamos lados con todos los vertices ya insertados
 			for (int i = 0; i < nVertices(); ++i)
 			{
 				if(u.getLabel() != _vertices[i].getLabel())
@@ -498,15 +499,19 @@ class Grafo
 			int ref = _curVertex;
 			_vertices.erase(_vertices.begin() + _curVertex);
 
+			//Reestructuramos las etiquetas
 			for (; ref <nVertices(); ++ref)
 				_vertices[ref].setLabel(_vertices[ref].getLabel() -1);
 
+			//Borramos los lados que tenia ese vertice
 			for (int i = 0; i < (int)_lados.size(); ++i)
 			{
 				if(_lados[i].first().getLabel() == _curVertex +1
 					or _lados[i].second().getLabel() == _curVertex +1)
 					_lados.erase(_lados.begin() + _curVertex);
 			}
+
+			//Reestructuramos las etiquetas del vertice lados
 			for (int i = 0; i < (int)_lados.size(); ++i)
 			{
 				if(_lados[i].first().getLabel() > _curVertex +1)
@@ -534,6 +539,7 @@ class Grafo
 			_Matrix[currEdge().first().getLabel()-1][currEdge().second().getLabel()-1] = std::numeric_limits<double>::infinity();
 			_Matrix[currEdge().second().getLabel()-1][currEdge().first().getLabel()-1] = std::numeric_limits<double>::infinity();
 			_lados.erase(_lados.begin() + _curEdge);
+			_curEdge= -1;	
 		}
 
 	/*!

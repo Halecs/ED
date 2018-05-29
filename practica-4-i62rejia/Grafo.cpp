@@ -135,7 +135,7 @@ ed::Grafo ed::Grafo::floyd()
 		ed::Grafo floyd;
 		floyd._Matrix.resize(nVertices());
 		for (int i = 0; i < nVertices(); ++i)
-			floyd._Matrix[i].resize(nVertices());
+			floyd._Matrix[i].resize(nVertices(), 0);
 
 		for (int i = 0; i < nVertices(); ++i)
 		floyd.addVertexN(_vertices[i].getDataX(), _vertices[i].getDataY());

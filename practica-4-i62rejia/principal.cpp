@@ -219,6 +219,8 @@ int main(){
 						break;
 					}					
 					g.addEdge(g.getVertex(origen),g.getVertex(destino));
+					std::cout<<BIGREEN<<"Lado agregado correctamente"<<RESET<<std::endl;
+					std::cin.ignore();
 					break;
 
 			case 11:
